@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Status</title>
+	<meta charset="utf-8">
+	<meta name="theme-color" content="#000">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link href="img/icon.png" rel="icon">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script type="text/javascript" src="circle-progress.min.js"></script>
+	<script type="text/javascript" src="scripts.js"></script>
+</head>
+<head>
+<body onload="init()" id="body" class="pre">
+	<div id="main">
+		<div class="boxes">
+			<div class="overview">
+				<div class="box deviceinfo" onclick="expand(this)">
+					<div class="head">
+						<div class="icon">info</div>
+						<div class="text">
+							<div class="title">Host</div>
+						</div>
+						<div class="icon close" onclick="hide(this)">close</div>
+					</div>
+					<div class="details">
+						<div style="margin: 0 auto;text-align: center;"><div class="nice" id="hostname"></div></div>
+						<div class="items">
+							<div>
+								<div class="icon" style="color: #FA0;">extension</div>
+								<div class="text">
+									<div class="name">OS</div>
+									<div class="value" id="os"></div>
+								</div>
+							</div>
+							<div>
+								<div class="icon" style="color: #F26;">extension</div>
+								<div class="text">
+									<div class="name">Uptime</div>
+									<div class="value" id="uptime"></div>
+								</div>
+							</div>
+							<div>
+								<div class="icon" style="color: #79F;">extension</div>
+								<div class="text">
+									<div class="name">App memory</div>
+									<div class="value" id="app_memory"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="load">
+					<div id="main_load">
+						<div id="main_loada" class="main_load zero">0</div>
+						<div id="main_loadb" class="main_load zero">0</div>
+						<div id="main_loadc" class="main_load zero">0</div>
+					</div>
+					<div class="main_bar"><div id="main_bar"></div></div>
+				</div>
+			</div>
+			<div class="box" id="cpu" style="--row: 0; --id: 0;" onclick="expand(this)">
+				<div class="head">
+					<div class="icon">developer_board</div>
+					<div class="text">
+						<div class="title">CPU</div>
+						<div class="brief" id="cpu_brief"></div>
+					</div>
+					<div class="icon close" onclick="hide(this)">close</div>
+				</div>
+				<div class="details">
+					<div class="usage">
+						<div class="text">
+							<div class="value" id="cpu_usage"></div>
+							<div class="unit">%</div>
+							<div class="total"></div>
+						</div>
+						<div class="progressbar"><div id="cpu_bar"></div></div>
+						<div class="addition">Temperature: <b id="cpu_temperature"></b> °C</div>
+					</div>
+					<div class="items">
+						<div>
+							<div class="icon" style="color: #F60">memory</div>
+							<div class="text">
+								<div class="name">Model</div>
+								<div class="value"><b id="cpu_model"></b> × <b id="cpu_cores"></b></div>
+							</div>
+						</div>
+						<div>
+							<div class="icon" style="color: #0D8">speed</div>
+							<div class="text">
+								<div class="name">Speed</div>
+								<div class="value">Current: <b id="cpu_speed"></b></div>
+								<div class="value">Range: <b id="cpu_min_freq"></b> - <b id="cpu_max_freq"></b></div>
+							</div>
+						</div>
+						<div>
+							<div class="icon" style="color: #78F">balance</div>
+							<div class="text">
+								<div class="name">Load average</div>
+								<div class="value" id="cpu_loadavg"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box" id="memory" style="--row: 0; --id: 1;" onclick="expand(this)">
+				<div class="head">
+					<div class="icon green">memory</div>
+					<div class="text">
+						<div class="title">Memory</div>
+						<div class="brief" id="mem_brief"></div>
+					</div>
+					<div class="icon close" onclick="hide(this)">close</div>
+				</div>
+				<div class="details">
+					<div class="usage">
+						<div class="text">
+							<div class="value" id="mem_used"></div>
+							<div class="unit" id="mem_used_unit"></div>
+							<div class="total"><b id="mem_total"></b> total</div>
+						</div>
+						<div class="progressbar"><div id="mem_bar"></div></div>
+						<div class="addition"><b id="mem_available"></b> available</div>
+					</div>
+					<div class="items">
+						<div>
+							<div class="icon" style="color: #F26;">extension</div>
+							<div class="text">
+								<div class="name">Swap</div>
+								<div class="value"><b id="mem_swap_used"></b> of <b id="mem_swap_total"></b></div>
+								<div class="value" id="mem_swap_available"></div>
+							</div>
+						</div>
+						<div>
+							<div class="icon" style="color: #6AF;">cached</div>
+							<div class="text">
+								<div class="name">Cached</div>
+								<div class="value" id="mem_cached"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="box" id="storage" style="--row: 1; --id: 2;" onclick="expand(this)">
+				<div class="head">
+					<div class="icon blue">storage</div>
+					<div class="text">
+						<div class="title">Storage</div>
+						<div class="brief" id="storage_brief"></div>
+					</div>
+					<div class="icon close" onclick="hide(this)">close</div>
+				</div>
+				<div class="details">
+					<div class="usage">
+						<div class="text">
+							<div class="value" id="storage_used"></div>
+							<div class="unit" id="storage_used_unit"></div>
+							<div class="total"><b id="storage_used_total"></b> total</div>
+						</div>
+						<div class="progressbar"><div id="storage_bar"></div></div>
+						<div class="addition"><b id="storage_available"></b> available</div>
+					</div>
+					<div class="items" id="storage_list"></div>
+				</div>
+			</div>
+			<div class="box" id="network" style="--row: 1; --id: 3;" onclick="expand(this)">
+				<div class="head">
+					<div class="icon purple">cloud_sync</div>
+					<div class="text">
+						<div class="title">Network</div>
+						<div class="brief" id="net_brief"></div>
+					</div>
+					<div class="icon close" onclick="hide(this)">close</div>
+				</div>
+				<div class="details">
+					<div class="usage">
+						<div class="text">
+							<div class="value" id="net_speed"></div>
+							<div class="unit" id="net_speed_unit"></div>
+							<div class="total" id="net_speed_mb"></div>
+						</div>
+						<div class="progressbar"><div id="net_bar"></div></div>
+						<div class="addition">Connection speed: <b id="net_link"></b></div>
+					</div>
+					<div class="items">
+						<div>
+							<div class="icon" style="color: #F26">swap_vert</div>
+							<div class="text">
+								<div class="name">Bandwidth</div>
+								<div class="value">Approx. <b id="net_all_daily"></b> daily</div>
+								<div class="value"><b id="net_all_all"></b> since boot</div>
+							</div>
+						</div>
+						<div>
+							<div class="icon" style="color: #0FF">upload</div>
+							<div class="text">
+								<div class="name">Upload</div>
+								<div class="value">Approx. <b id="net_up_daily"></b> daily</div>
+								<div class="value"><b id="net_up_all"></b> since boot</div>
+							</div>
+						</div>
+						<div>
+							<div class="icon" style="color: #0F8">download</div>
+							<div class="text">
+								<div class="name">Download</div>
+								<div class="value">Approx. <b id="net_down_daily"></b> daily</div>
+								<div class="value"><b id="net_down_all"></b> since boot</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="darken"></div>
+</body>
+</html>
