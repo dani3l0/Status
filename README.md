@@ -18,12 +18,10 @@ Designed to be lightweight, simple and pleasant to use.
 
 **Status is now served on [localhost:9000](localhost:9000).**
 
-If the app crashes, please see the next section.
+If the app crashes, check config.
 
 
 ## Configuration
-
-If you encounter a crash or you want to setup stuff on your own, keep reading.
 
 There's no config at all, coz I was too lazy for that.
 
