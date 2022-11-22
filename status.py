@@ -79,6 +79,6 @@ ssl_context = None
 if domain:
     ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     ssl_dir = f"/etc/letsencrypt/live/{domain}"
-    ssl_context.load_cert_chain(f"{domain}/fullchain.pem", f"{domain}/privkey.pem")
+    ssl_context.load_cert_chain(f"{ssl_dir}/fullchain.pem", f"{ssl_dir}/privkey.pem")
 
 web.run_app(app, host=host, port=port, ssl_context=ssl_context)
