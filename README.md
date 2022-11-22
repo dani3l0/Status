@@ -1,5 +1,3 @@
-# Status
-
 <img src="screenshots/status.png" alt="Status" width="600"/>
 
 ## What is it?
