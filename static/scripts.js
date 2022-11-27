@@ -58,17 +58,21 @@ Array.prototype.max = function() {
 
 function parseSize(value, unit="") {
 	let addon = "K";
-	if (value >= 1000) {
+	r_value = Math.round(value);
+	if (r_value >= 1000) {
 		addon = "M";
 		value /= 1000;
+		r_value = Math.round(r_value / 1000);
 	}
-	if (value >= 1000) {
+	if (r_value >= 1000) {
 		addon = "G";
 		value /= 1000;
+		r_value = Math.round(r_value / 1000);
 	}
-	if (value >= 1000) {
+	if (r_value >= 1000) {
 		addon = "T";
 		value /= 1000;
+		r_value = Math.round(r_value / 1000);
 	}
 	let fixd = 0;
 	let ferst = value.toFixed(2).split(".")[0].length;
@@ -76,7 +80,7 @@ function parseSize(value, unit="") {
 	else if (ferst == 2) fixd = 1;
 	value = value.toFixed(fixd);
 	if (!unit) unit = addon = "";
-	return `${value.replace("100.0", "100")} ${addon}${unit}`;
+	return `${value} ${addon}${unit}`;
 }
 
 function fancyText(id, val, zero) {
@@ -133,7 +137,7 @@ function fetchData() {
 		set("uptime", mkTime(data.host.uptime));
 		set("app_memory", parseSize(data.host.app_memory, "B"));
 
-		let cpu_temp = Math.round(data.cpu.core_temp * 10) / 10;
+		let cpu_temp = data.cpu.core_temp.toFixed(1);
 		data.cpu.utilisation *= 100;
 		data.cpu.utilisation += 0.25;
 		let cpu_util = Math.round(data.cpu.utilisation);
