@@ -22,11 +22,30 @@ def temp_val(raw_value):
     return raw_value
 
 
+def get_default_iface_name_linux():
+    route = "/proc/net/route"
+    with open(route) as f:
+        for line in f.readlines():
+            try:
+                iface, dest, _, flags, _, _, _, _, _, _, _, =  line.strip().split()
+                if dest != '00000000' or not int(flags, 16) & 2:
+                    continue
+                return iface
+            except:
+                continue
+    # Shouldn't happen
+    return None
+    ifaces = os.listdir("/sys/class/net")
+    ifaces.remove("lo")
+    return ifaces[0] if len(ifaces) else None
+
+
 class Machine:
-    def __init__(self, filesystems=None, iface="eno1", hwmon_sensor="coretemp"):
+    def __init__(self, filesystems=None, iface="auto", hwmon_sensor="coretemp"):
         if filesystems is None:
             filesystems = {"Primary": ["/", "folder", "#F66"]}
         self.cpu_model = "Unknown"
+        self.iface_auto = iface == "auto"
         cpuinfo = getval("/proc/cpuinfo")
         for line in cpuinfo.split("\n"):
             if "model name" in line:
@@ -131,11 +150,17 @@ class Machine:
         return filesystems
 
     def get_net(self):
+        if self.iface_auto:
+            self.iface = get_default_iface_name_linux()
         path = f"/sys/class/net/{self.iface}"
         rx = getval(f"{path}/statistics/rx_bytes", True)
         tx = getval(f"{path}/statistics/tx_bytes", True)
-        speed = getval(f"{path}/speed", True)
+        try:
+            speed = getval(f"{path}/speed", True)
+        except OSError:
+            speed = -1
         return {
+            "interface": self.iface,
             "speed": speed,
             "rx": rx,
             "tx": tx
