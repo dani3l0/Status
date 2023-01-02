@@ -34,7 +34,6 @@ def get_default_iface_name_linux():
             except:
                 continue
     # Shouldn't happen
-    return None
     ifaces = os.listdir("/sys/class/net")
     ifaces.remove("lo")
     return ifaces[0] if len(ifaces) else None
