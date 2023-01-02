@@ -12,7 +12,7 @@ CONFIG = {
         "domain": None
     },
     "machine": {
-        "network_interface": "eno1",
+        "network_interface": "auto",
         "hwmon_sensor": "coretemp",
         "disks": {
             "Primary": ["/", "folder", "#F66"]

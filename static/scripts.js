@@ -209,22 +209,20 @@ function fetchData() {
 		set("storage_used_total", parseSize(storage_total, "B"));
 		set("storage_available", parseSize(storage_available, "B"));
 
-		let net_available = data.net.speed > 0;
-		if (!network_last) network_last = data.net;
+		if (!network_last || network_last.interface != data.net.interface) network_last = data.net;
 		let days_passed = data.host.uptime / (60 * 60 * 24);
 		let speed_down = (data.net.rx - network_last.rx) / 1000 / delay;
 		let speed_up = (data.net.tx - network_last.tx) / 1000 / delay;
 		let speed = speed_up + speed_down;
 		let speed_bit = (speed) * 8;
-		let net_pp = 100 * speed_bit / (data.net.speed * 1000);
-		if (net_available) {
+		let net_pp = 0;
+		if (data.net.speed > 0) {
+			net_pp = 100 * speed_bit / (data.net.speed * 1000);
 			set("net_link", parseSize(data.net.speed * 1000, "bit/s"));
-			set("net_brief", `${parseSize(speed_bit, "bit/s")}`);
 		}
-		else {
-			set("net_link", "Unavailable");
-			set("net_brief", "Unavailable");
-		}
+		else set("net_link", "Unavailable");
+		if (data.net.interface) set("net_brief", `${parseSize(speed_bit, "bit/s")}`);
+		else set("net_brief", "Unavailable");
 		get("net_bar").style.width = `${net_pp}%`;
 		set("net_speed", parseSize(speed_bit));
 		set("net_speed_unit", parseSize(speed_bit, "bit/s").split(" ")[1]);
