@@ -3,7 +3,6 @@ from time import time
 from aiohttp import web
 from machine import Machine
 
-
 ########################################################################################################################
 
 # Runs the default config with 1 root partition, 'eno1' as network interface and 'coretemp' as hwmon sensor
@@ -23,6 +22,7 @@ stat = Machine()
 domain = None  # Set this to get Secure HTTP with Let's Encrypt certificates.
 port = 9000  # Port on which app will be served
 host = "0.0.0.0"  # Address on which app will be served
+aiohttp_quiet = True  # Hide aiohttp exceptions (for development set this to False)
 
 ########################################################################################################################
 
@@ -73,6 +73,7 @@ async def redirector(request, handler):
 
 routes.static("/", static)
 app = web.Application(middlewares=[redirector])
+app.logger.manager.disable = 100 * aiohttp_quiet
 app.add_routes(routes)
 
 ssl_context = None
