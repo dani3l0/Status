@@ -1,31 +1,38 @@
 import ssl
+import json
 from time import time
 from aiohttp import web
 from machine import Machine
 
-########################################################################################################################
 
-# Runs the default config with 1 root partition, 'eno1' as network interface and 'coretemp' as hwmon sensor
-stat = Machine()
+CONFIG = {
+    "server": {
+        "port": 9000,
+        "bind_address": "0.0.0.0",
+        "domain": None
+    },
+    "machine": {
+        "network_interface": "eno1",
+        "hwmon_sensor": "coretemp",
+        "disks": {
+            "Primary": ["/", "folder", "#F66"]
+        }
+    },
+    "misc": {
+        "aiohttp_quiet": True
+    }
+}
 
-# Custom setup, uncomment below lines and adjust values on your own
-# stat = Machine(
-#     {  # Filesystems: "Name": ["mount point", "icon name (https://fonts.google.com/icons)", "icon color"]
-#         "System": ["/", "folder", "#F66"],
-#         "Home": ["/home", "folder", "#F66"],
-#         "Backups": ["/mnt/backups", "backup", "#F66"]
-#     },
-#     iface="eno1",  # Default network interface
-#     hwmon_sensor="coretemp"  # Sensor name to read temperatures from. Names can be found at /sys/class/hwmon/*/name
-# )
 
-domain = None  # Set this to get Secure HTTP with Let's Encrypt certificates.
-port = 9000  # Port on which app will be served
-host = "0.0.0.0"  # Address on which app will be served
-aiohttp_quiet = True  # Hide aiohttp exceptions (for development set this to False)
+try:
+    CONFIG = json.loads(open("config.json").read())
+except FileNotFoundError:
+    conf = open("config.json", "w")
+    conf.write(json.dumps(CONFIG, indent=4))
+    conf.close()
 
-########################################################################################################################
 
+stat = Machine(CONFIG["machine"]["disks"], CONFIG["machine"]["network_interface"], CONFIG["machine"]["hwmon_sensor"])
 
 stat_cache = {}
 stat_cache_updated = 0
@@ -73,13 +80,13 @@ async def redirector(request, handler):
 
 routes.static("/", static)
 app = web.Application(middlewares=[redirector])
-app.logger.manager.disable = 100 * aiohttp_quiet
+app.logger.manager.disable = 100 * CONFIG["misc"]["aiohttp_quiet"]
 app.add_routes(routes)
 
 ssl_context = None
-if domain:
+if CONFIG["server"]["domain"]:
     ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-    ssl_dir = f"/etc/letsencrypt/live/{domain}"
+    ssl_dir = f"/etc/letsencrypt/live/{CONFIG['server']['domain']}"
     ssl_context.load_cert_chain(f"{ssl_dir}/fullchain.pem", f"{ssl_dir}/privkey.pem")
 
-web.run_app(app, host=host, port=port, ssl_context=ssl_context)
+web.run_app(app, host=CONFIG["server"]["bind_address"], port=CONFIG["server"]["port"], ssl_context=ssl_context)

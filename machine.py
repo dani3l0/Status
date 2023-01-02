@@ -23,7 +23,9 @@ def temp_val(raw_value):
 
 
 class Machine:
-    def __init__(self, filesystems={"Primary": ["/", "folder", "#F66"]}, iface="eno1", hwmon_sensor="coretemp"):
+    def __init__(self, filesystems=None, iface="eno1", hwmon_sensor="coretemp"):
+        if filesystems is None:
+            filesystems = {"Primary": ["/", "folder", "#F66"]}
         self.cpu_model = "Unknown"
         cpuinfo = getval("/proc/cpuinfo")
         for line in cpuinfo.split("\n"):
