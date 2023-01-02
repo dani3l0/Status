@@ -81,6 +81,7 @@ function parseSize(value, unit="") {
 	if (ferst == 1) fixd = 2;
 	else if (ferst == 2) fixd = 1;
 	value = value.toFixed(fixd);
+	if (addon == "K") value = Math.round(value);
 	if (!unit) unit = addon = "";
 	return `${value} ${addon}${unit}`;
 }
