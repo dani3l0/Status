@@ -4,6 +4,9 @@ import re
 import asyncio
 
 
+colors = ["#F26", "#78F", "#0D8", "#FB0", "#96F", "#F56", "#0CB", "#F60"]
+
+
 def getval(path, isint=False):
     val = open(path, "r").read().rstrip()
     return int(val) if isint else val
@@ -146,12 +149,14 @@ class Machine:
     def get_storage(self):
         if self.fs_auto:
             self.filesystems = {}
+            i = 0
             mounts = getval("/etc/mtab").split("\n")
             for mount in mounts:
                 if mount.startswith("/dev/"):
                     line = mount.split(" ")
                     stuff = nice_path(line[1])
-                    self.filesystems[stuff[0]] = [line[1], stuff[1], "#999"]
+                    self.filesystems[stuff[0]] = [line[1], stuff[1], colors[i % len(colors)]]
+                    i += 1
         filesystems = {}
         for fs in self.filesystems:
             stat = os.statvfs(self.filesystems[fs][0])
