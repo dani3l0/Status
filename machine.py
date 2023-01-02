@@ -15,6 +15,13 @@ def grep(contents, keyword):
             return re.sub(r'[^0-9]', '', line)
 
 
+def temp_val(raw_value):
+    if (len(str(raw_value))) >= 4:
+        raw_value /= 1000
+
+    return raw_value
+
+
 class Machine:
     def __init__(self, filesystems={"Primary": ["/", "folder", "#F66"]}, iface="eno1", hwmon_sensor="coretemp"):
         self.cpu_model = "Unknown"
@@ -40,14 +47,22 @@ class Machine:
         idle_delta, total_delta = idle - last_idle, total - last_total
         utilisation = 1.0 - idle_delta / total_delta
         cores = os.cpu_count()
-        coretemp = None
         path = "/sys/class/hwmon"
         hwmon = [f"{path}/{x}" for x in os.listdir(path)]
+        core_temps = []
+        max_temps = []
+        temp_id = 0
         for sensor in hwmon:
             if getval(f"{sensor}/name") == self.hwmon_sensor:
-                coretemp = getval(f"{sensor}/temp1_input", True)
-                if (len(str(coretemp))) > 4:
-                    coretemp /= 1000
+                while True:
+                    try:
+                        temp_id += 1
+                        coretemp = getval(f"{sensor}/temp{temp_id}_input", True)
+                        max_temp = getval(f"{sensor}/temp{temp_id}_crit", True)
+                        core_temps.append(temp_val(coretemp))
+                        max_temps.append(temp_val(max_temp))
+                    except FileNotFoundError:
+                        break
 
         cpu_cur_freqs = []
         cpu_min_freqs = []
@@ -63,7 +78,7 @@ class Machine:
                 cpu_min_freqs.append(min_freq)
                 cpu_max_freqs.append(max_freq)
                 cpuid += 1
-            except:
+            except FileNotFoundError:
                 break
 
         return {
@@ -73,7 +88,8 @@ class Machine:
             "min_freq": cpu_min_freqs,
             "max_freq": cpu_max_freqs,
             "utilisation": utilisation,
-            "core_temp": coretemp
+            "core_temp": core_temps,
+            "meltdown": max_temps,
         }
 
     @staticmethod

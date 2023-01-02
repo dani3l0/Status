@@ -36,9 +36,6 @@ function hide(element) {
 	}, 450);
 }
 
-function drawGauge(value, data) {
-}
-
 function get(id) {
 	return document.getElementById(id);
 }
@@ -137,7 +134,7 @@ function fetchData() {
 		set("uptime", mkTime(data.host.uptime));
 		set("app_memory", parseSize(data.host.app_memory, "B"));
 
-		let cpu_temp = data.cpu.core_temp.toFixed(1);
+		let cpu_temp = data.cpu.core_temp.max();
 		data.cpu.utilisation *= 100;
 		data.cpu.utilisation += 0.25;
 		let cpu_util = Math.round(data.cpu.utilisation);
