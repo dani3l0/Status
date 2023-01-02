@@ -14,6 +14,7 @@ CONFIG = {
     "machine": {
         "network_interface": "auto",
         "hwmon_sensor": "coretemp",
+        "auto_fs": True,
         "disks": {
             "Primary": ["/", "folder", "#F66"]
         }
@@ -32,7 +33,12 @@ except FileNotFoundError:
     conf.close()
 
 
-stat = Machine(CONFIG["machine"]["disks"], CONFIG["machine"]["network_interface"], CONFIG["machine"]["hwmon_sensor"])
+stat = Machine(
+    CONFIG["machine"]["disks"],
+    CONFIG["machine"]["auto_fs"],
+    CONFIG["machine"]["network_interface"],
+    CONFIG["machine"]["hwmon_sensor"]
+)
 
 stat_cache = {}
 stat_cache_updated = 0

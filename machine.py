@@ -39,12 +39,19 @@ def get_default_iface_name_linux():
     return ifaces[0] if len(ifaces) else None
 
 
+def nice_path(path):
+    if path == "/": return ["OS", "settings"]
+    elif path == "/boot" or path.startswith("/boot/"): return ["Boot", "flag"]
+    return [path.split("/")[-1].title(), "folder"]
+
+
 class Machine:
-    def __init__(self, filesystems=None, iface="auto", hwmon_sensor="coretemp"):
+    def __init__(self, filesystems=None, auto_fs=True, iface="auto", hwmon_sensor="coretemp"):
         if filesystems is None:
             filesystems = {"Primary": ["/", "folder", "#F66"]}
         self.cpu_model = "Unknown"
         self.iface_auto = iface == "auto"
+        self.fs_auto = auto_fs
         cpuinfo = getval("/proc/cpuinfo")
         for line in cpuinfo.split("\n"):
             if "model name" in line:
@@ -137,6 +144,14 @@ class Machine:
         }
 
     def get_storage(self):
+        if self.fs_auto:
+            self.filesystems = {}
+            mounts = getval("/etc/mtab").split("\n")
+            for mount in mounts:
+                if mount.startswith("/dev/"):
+                    line = mount.split(" ")
+                    stuff = nice_path(line[1])
+                    self.filesystems[stuff[0]] = [line[1], stuff[1], "#999"]
         filesystems = {}
         for fs in self.filesystems:
             stat = os.statvfs(self.filesystems[fs][0])
