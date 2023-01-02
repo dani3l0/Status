@@ -53,6 +53,10 @@ Array.prototype.max = function() {
 	return Math.max.apply(null, this);
 }
 
+Array.prototype.min = function() {
+	return Math.min.apply(null, this);
+}
+
 function parseSize(value, unit="") {
 	let addon = "K";
 	r_value = Math.round(value);
@@ -134,7 +138,8 @@ function fetchData() {
 		set("uptime", mkTime(data.host.uptime));
 		set("app_memory", parseSize(data.host.app_memory, "B"));
 
-		let cpu_temp = data.cpu.core_temp.max();
+		let cpu_temp = Math.round(data.cpu.core_temp.max() * 10) / 10;
+		let cpu_meltdown = data.cpu.meltdown.min();
 		data.cpu.utilisation *= 100;
 		data.cpu.utilisation += 0.25;
 		let cpu_util = Math.round(data.cpu.utilisation);
@@ -143,6 +148,7 @@ function fetchData() {
 		set("cpu_usage", cpu_util);
 		get("cpu_bar").style.width = `${cpu_util}%`;
 		set("cpu_temperature", cpu_temp);
+		set("cpu_meltdown", cpu_meltdown);
 		set("cpu_cores", `${data.cpu.cores}`);
 		set("cpu_speed", parseSize(data.cpu.cur_freq.max(), "Hz"));
 		set("cpu_min_freq", parseSize(data.cpu.min_freq.max(), "Hz"));
