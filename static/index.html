@@ -77,27 +77,26 @@
 							<div class="total"></div>
 						</div>
 						<div class="progressbar"><div id="cpu_bar"></div></div>
-						<div class="addition"><b id="cpu_model"></b> × <b id="cpu_cores"></b></div>
+						<div class="addition">Temperature: <b id="cpu_temperature"></b> °C</div>
 					</div>
 					<div class="items">
 						<div>
+							<div class="icon" style="color: #F60">memory</div>
+							<div class="text">
+								<div class="name">Model</div>
+								<div class="value"><b id="cpu_model"></b> × <b id="cpu_cores"></b></div>
+							</div>
+						</div>
+						<div>
 							<div class="icon" style="color: #0D8">speed</div>
 							<div class="text">
-								<div class="name">Frequency</div>
+								<div class="name">Speed</div>
 								<div class="value">Current: <b id="cpu_speed"></b></div>
 								<div class="value">Range: <b id="cpu_min_freq"></b> - <b id="cpu_max_freq"></b></div>
 							</div>
 						</div>
 						<div>
-							<div class="icon" style="color: #F26">thermostat</div>
-							<div class="text">
-								<div class="name">Temperature</div>
-								<div class="value">Current: <b id="cpu_temperature"></b> °C</div>
-								<div class="value">Meltdown: <b id="cpu_meltdown"></b> °C</div>
-							</div>
-						</div>
-						<div>
-							<div class="icon" style="color: #6AF">balance</div>
+							<div class="icon" style="color: #78F">balance</div>
 							<div class="text">
 								<div class="name">Load average</div>
 								<div class="value" id="cpu_loadavg"></div>
