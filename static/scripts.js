@@ -30,6 +30,7 @@ function hide(element) {
 	element = element.parentNode.parentNode;
 	get("main").classList.remove("hide");
 	element.classList.remove("expanded");
+	element.scrollTop = 0;
 	setTimeout(() => {
 		element.classList.remove("front");
 		EXPANDED = false

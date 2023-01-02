@@ -51,6 +51,12 @@ body {
 	-webkit-tap-highlight-color: transparent;
 	transition: transform .25s, opacity .3s;
 }
+* {
+	scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+	display: none;
+}
 .pre {
 	transform: scale(0.93);
 	opacity: 0;
@@ -192,6 +198,7 @@ body {
 	height: 540px;
 	border-radius: 32px;
 	z-index: 1000;
+	overflow-y: scroll;
 }
 .box.expanded > .head {
 	margin-bottom: 12px;
