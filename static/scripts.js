@@ -25,9 +25,9 @@ function expand(element) {
 	element.classList.add("expanded");
 	element.classList.add("front");
 }
-function hide(element) {
+function hide(element, directly) {
 	darken(false);
-	element = element.parentNode.parentNode;
+	if (!directly) element = element.parentNode.parentNode;
 	get("main").classList.remove("hide");
 	element.classList.remove("expanded");
 	element.scrollTop = 0;
@@ -36,9 +36,11 @@ function hide(element) {
 		EXPANDED = false
 	}, 450);
 }
-
-function get(id) {
-	return document.getElementById(id);
+function hideAll() {
+	let windows = document.getElementsByClassName("expanded");
+	for (var i = 0; i < windows.length; i++) {
+		hide(windows[i], true);
+	}
 }
 
 function set(id, value) {
