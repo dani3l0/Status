@@ -149,10 +149,10 @@ function fetchData() {
 		let cpu_util = Math.round(data.cpu.utilisation);
 		if (Math.abs(cpu_meltdown) == Infinity) {
 			get("cpu_meltdown").parentNode.style.display = "none";
-			set("cpu_meltdown", cpu_meltdown);
 		}
 		else {
 			get("cpu_meltdown").parentNode.style.display = null;
+			set("cpu_meltdown", cpu_meltdown);
 		}
 		if (Math.abs(cpu_temp) == Infinity) {
 			set("cpu_temperature", `Unknown`);
