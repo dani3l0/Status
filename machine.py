@@ -59,6 +59,10 @@ class Machine:
         for line in cpuinfo.split("\n"):
             if "model name" in line:
                 self.cpu_model = re.sub(".*model name.*:", "", line, 1).strip()
+                break
+            elif "Model" in line:
+                self.cpu_model = re.sub(".*Model.*:", "", line, 1).strip()
+                break
         self.arch = platform.architecture()
         self.hwmon_sensor = hwmon_sensor
         self.filesystems = filesystems
