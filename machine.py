@@ -1,5 +1,4 @@
 import os
-import platform
 import re
 import asyncio
 
@@ -63,7 +62,6 @@ class Machine:
             elif "Model" in line:
                 self.cpu_model = re.sub(".*Model.*:", "", line, 1).strip()
                 break
-        self.arch = platform.architecture()
         self.hwmon_sensor = hwmon_sensor
         self.filesystems = filesystems
         self.iface = iface
@@ -85,7 +83,6 @@ class Machine:
         hwmon = [f"{path}/{x}" for x in os.listdir(path)]
         core_temps = []
         max_temps = []
-        temp_id = 0
         for sensor in hwmon:
             if getval(f"{sensor}/name") == self.hwmon_sensor:
                 entities = os.listdir(f"{sensor}")
