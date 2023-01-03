@@ -372,6 +372,29 @@ body {
 		width: calc(100% - 64px);
 	}
 }
+
+@media(max-height: 618px) {
+	.box {
+		--top: 256px;
+	}
+	.deviceinfo {
+		top: 88px !important;
+	}
+	.load {
+		top: 54px;
+	}
+}
+@media(max-height: 480px) {
+	.box {
+		--top: 192px;
+	}
+	.deviceinfo {
+		top: 54px !important;
+	}
+	.load {
+		top: 20px;
+	}
+}
 @media (max-width: 540px) {
 	.box.expanded {
 		width: calc(100% - 40px);
