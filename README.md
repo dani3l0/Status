@@ -49,7 +49,7 @@ python3 status.py
 | `misc`    | `aiohttp_quiet`     | Disables annoying HTTP library exceptions. For **debugging**, set this to `false`.                                                                                                                                                                                                               |
 
 
-### Disks
+### Disks (manual config, only when `auto_fs` is set to `false`)
 
 **Here's the single disk definition from default config:**
 
