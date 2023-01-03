@@ -89,8 +89,11 @@ class Machine:
                     if entity.startswith("temp") and entity.endswith("input"):
                         try:
                             coretemp = getval(f"{sensor}/{entity}", True)
-                            max_temp = getval(f"{sensor}/{entity.replace('input', 'crit')}", True)
                             core_temps.append(temp_val(coretemp))
+                        except FileNotFoundError:
+                            pass
+                        try:
+                            max_temp = getval(f"{sensor}/{entity.replace('input', 'crit')}", True)
                             max_temps.append(temp_val(max_temp))
                         except FileNotFoundError:
                             pass
