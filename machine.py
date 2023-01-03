@@ -3,7 +3,6 @@ import platform
 import re
 import asyncio
 
-
 colors = ["#F26", "#78F", "#0D8", "#FB0", "#96F", "#F56", "#0CB", "#F60"]
 
 
@@ -31,7 +30,7 @@ def get_default_iface_name_linux():
     with open(route) as f:
         for line in f.readlines():
             try:
-                iface, dest, _, flags, _, _, _, _, _, _, _, =  line.strip().split()
+                iface, dest, _, flags, _, _, _, _, _, _, _, = line.strip().split()
                 if dest != '00000000' or not int(flags, 16) & 2:
                     continue
                 interface = iface
@@ -42,8 +41,10 @@ def get_default_iface_name_linux():
 
 
 def nice_path(path):
-    if path == "/": return ["OS", "settings"]
-    elif path == "/boot" or path.startswith("/boot/"): return ["Boot", "flag"]
+    if path == "/":
+        return ["OS", "settings"]
+    elif path == "/boot" or path.startswith("/boot/"):
+        return ["Boot", "flag"]
     return [path.split("/")[-1].title(), "folder"]
 
 
