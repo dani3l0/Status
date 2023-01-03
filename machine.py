@@ -27,19 +27,18 @@ def temp_val(raw_value):
 
 def get_default_iface_name_linux():
     route = "/proc/net/route"
+    interface = None
     with open(route) as f:
         for line in f.readlines():
             try:
                 iface, dest, _, flags, _, _, _, _, _, _, _, =  line.strip().split()
                 if dest != '00000000' or not int(flags, 16) & 2:
                     continue
-                return iface
+                interface = iface
+                break
             except:
                 continue
-    # Shouldn't happen
-    ifaces = os.listdir("/sys/class/net")
-    ifaces.remove("lo")
-    return ifaces[0] if len(ifaces) else None
+    return interface
 
 
 def nice_path(path):
@@ -172,8 +171,12 @@ class Machine:
         if self.iface_auto:
             self.iface = get_default_iface_name_linux()
         path = f"/sys/class/net/{self.iface}"
-        rx = getval(f"{path}/statistics/rx_bytes", True)
-        tx = getval(f"{path}/statistics/tx_bytes", True)
+        try:
+            rx = getval(f"{path}/statistics/rx_bytes", True)
+            tx = getval(f"{path}/statistics/tx_bytes", True)
+        except FileNotFoundError:
+            rx = 0
+            tx = 0
         try:
             speed = getval(f"{path}/speed", True)
         except OSError:
