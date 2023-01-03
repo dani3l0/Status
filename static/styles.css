@@ -380,6 +380,9 @@ body {
 	.deviceinfo {
 		top: 88px !important;
 	}
+	.box.expanded {
+		height: calc(100% - 64px);
+	}
 	.load {
 		top: 54px;
 	}
