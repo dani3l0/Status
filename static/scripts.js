@@ -147,12 +147,24 @@ function fetchData() {
 		data.cpu.utilisation *= 100;
 		data.cpu.utilisation += 0.25;
 		let cpu_util = Math.round(data.cpu.utilisation);
-		set("cpu_brief", `${cpu_util}%, ${cpu_temp} °C`);
+		if (Math.abs(cpu_meltdown) == Infinity) {
+			get("cpu_meltdown").parentNode.style.display = "none";
+			set("cpu_meltdown", cpu_meltdown);
+		}
+		else {
+			get("cpu_meltdown").parentNode.style.display = null;
+		}
+		if (Math.abs(cpu_temp) == Infinity) {
+			set("cpu_temperature", `Unknown`);
+			set("cpu_brief", `${cpu_util}%, ${parseSize(data.cpu.cur_freq.max(), "Hz")}`);
+		}
+		else {
+			set("cpu_temperature", `${cpu_temp} °C`);
+			set("cpu_brief", `${cpu_util}%, ${cpu_temp} °C`);
+		}
 		set("cpu_model", data.cpu.model);
 		set("cpu_usage", cpu_util);
 		get("cpu_bar").style.width = `${cpu_util}%`;
-		set("cpu_temperature", cpu_temp);
-		set("cpu_meltdown", cpu_meltdown);
 		set("cpu_cores", `${data.cpu.cores}`);
 		set("cpu_speed", parseSize(data.cpu.cur_freq.max(), "Hz"));
 		set("cpu_min_freq", parseSize(data.cpu.min_freq.max(), "Hz"));
