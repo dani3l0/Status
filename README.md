@@ -7,8 +7,22 @@ Designed to be lightweight, simple and pleasant to use.
 
 It utilizes virtual file systems (/proc, /sys) for resource measurements, for maximum speed & simplicity.
 
+<img src="screenshots/status-1.png" alt="Status" width="192"/>
+<img src="screenshots/status-2.png" alt="Status" width="192"/>
+<img src="screenshots/status-3.png" alt="Status" width="192"/>
+<br>
+<img src="screenshots/status-4.png" alt="Status" width="192"/>
+<img src="screenshots/status-5.png" alt="Status" width="192"/>
+<img src="screenshots/status-6.png" alt="Status" width="192"/>
 
 ## How to host?
+
+**A Linux machine is required.**
+Tested on some computers having AMD and Intel processors.
+Moreover, seems to work fine on Raspberry Pis.
+However, virtual isolated environments might cause unexpected behaviour.
+
+<u>The best way is to host it on **bare metal**</u>.
 
 ### Clone the repo:
 
@@ -37,19 +51,19 @@ python3 status.py
 
 **IMPORTANT: <u>Do not delete</u> the config keys, otherwise app won't start!**
 
-| Section   | Key                 | Description                                                                                                                                                                                                                                                                                      |
-|-----------|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `server`  | `port`              | HTTP(S) port Status is listening on                                                                                                                                                                                                                                                              |
-| `server`  | `bind_address`      | Address Status is listening on                                                                                                                                                                                                                                                                   |
-| `server`  | `domain`            | Domain name, enables HTTPS with Let's Encrypt certificates (example: `minipc.mydomain.com`)                                                                                                                                                                                                      |
-| `machine` | `network_interface` | A network interface name we want to be measured. `auto` for auto-detection, otherwise set a desired interface name, like `"eno1"`                                                                                                                                                                |
-| `machine` | `hwmon_sensor`      | **Usually, there is no need to change this.** It's a hwmon sensor name for temperature measurement. Some devices might have different sensor name (my minipc has `k10temp`).<br>**If you are getting exceptions or crashes**, check `cat /sys/class/hwmon/*/name` for list of available sensors. |
-| `machine` | `auto_fs`           | Auto-detect mounted disks & partitions                                                                                                                                                                                                                                                           |
-| `machine` | `disks`             | Describes which disks/partitions we want to have listed, **please see below**<br>Ignored when `auto_fs` is set to `true`.                                                                                                                                                                        |
-| `misc`    | `aiohttp_quiet`     | Disables annoying HTTP library exceptions. For **debugging**, set this to `false`.                                                                                                                                                                                                               |
+| Section   | Key                 | Description                                                                                                                                                                                                                                                                                         |
+|-----------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `server`  | `port`              | HTTP(S) port Status is listening on                                                                                                                                                                                                                                                                 |
+| `server`  | `bind_address`      | Address Status is listening on                                                                                                                                                                                                                                                                      |
+| `server`  | `domain`            | Domain name, enables HTTPS with Let's Encrypt certificates (example: `minipc.mydomain.com`)                                                                                                                                                                                                         |
+| `machine` | `network_interface` | A network interface name we want to be measured. `auto` for auto-detection, otherwise set a desired interface name, like `"eno1"`                                                                                                                                                                   |
+| `machine` | `hwmon_sensor`      | **Source of temperature values.** It's a hwmon sensor name for temperature measurement.<br>Some devices might have different sensor name (like Raspberry Pis having `cpu_thermal`).<br>**If you see unknown temperatures**, check `cat /sys/class/hwmon/*/name` for list of available sensor names. |
+| `machine` | `auto_fs`           | Auto-detect mounted disks & partitions                                                                                                                                                                                                                                                              |
+| `machine` | `disks`             | Describes which disks/partitions we want to have listed, **please see below**.<br>Ignored when `auto_fs` is set to `true`.                                                                                                                                                                          |
+| `misc`    | `aiohttp_quiet`     | Disables HTTP library exceptions and debugging stuff. For **development**, please use `false`.                                                                                                                                                                                                      |
 
 
-### Disks (manual config, only when `auto_fs` is set to `false`)
+### Disks (manual config, works only when `auto_fs` is set to `false`)
 
 **Here's the single disk definition from default config:**
 
@@ -59,7 +73,7 @@ python3 status.py
 
 `Primary` - desired disk/partition name to be shown in app
 
-`/` - path of the filesystem
+`/` - path of the target filesystem
 
 `folder` - icon name, see [Google Icon Fonts](https://fonts.google.com/icons)
 
