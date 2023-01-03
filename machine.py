@@ -84,15 +84,16 @@ class Machine:
         temp_id = 0
         for sensor in hwmon:
             if getval(f"{sensor}/name") == self.hwmon_sensor:
-                while True:
-                    try:
-                        temp_id += 1
-                        coretemp = getval(f"{sensor}/temp{temp_id}_input", True)
-                        max_temp = getval(f"{sensor}/temp{temp_id}_crit", True)
-                        core_temps.append(temp_val(coretemp))
-                        max_temps.append(temp_val(max_temp))
-                    except FileNotFoundError:
-                        break
+                entities = os.listdir(f"{sensor}")
+                for entity in entities:
+                    if entity.startswith("temp") and entity.endswith("input"):
+                        try:
+                            coretemp = getval(f"{sensor}/{entity}", True)
+                            max_temp = getval(f"{sensor}/{entity.replace('input', 'crit')}", True)
+                            core_temps.append(temp_val(coretemp))
+                            max_temps.append(temp_val(max_temp))
+                        except FileNotFoundError:
+                            pass
 
         cpu_cur_freqs = []
         cpu_min_freqs = []
