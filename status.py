@@ -9,7 +9,9 @@ CONFIG = {
     "server": {
         "port": 9000,
         "bind_address": "0.0.0.0",
-        "domain": None
+        "domain": None,
+        "tls_cert_path": None,
+        "tls_key_path": None
     },
     "machine": {
         "network_interface": "auto",
@@ -93,6 +95,14 @@ ssl_context = None
 if CONFIG["server"]["domain"]:
     ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
     ssl_dir = f"/etc/letsencrypt/live/{CONFIG['server']['domain']}"
-    ssl_context.load_cert_chain(f"{ssl_dir}/fullchain.pem", f"{ssl_dir}/privkey.pem")
+
+    pubkey = CONFIG["server"]["tls_cert_path"]
+    if not pubkey:
+        pubkey = f"{ssl_dir}/fullchain.pem"
+    privkey = CONFIG["server"]["tls_key_path"]
+    if not privkey:
+        privkey = f"{ssl_dir}/privkey.pem"
+
+    ssl_context.load_cert_chain(pubkey, privkey)
 
 web.run_app(app, host=CONFIG["server"]["bind_address"], port=CONFIG["server"]["port"], ssl_context=ssl_context)
