@@ -168,7 +168,7 @@ function fetchData() {
 		set("cpu_speed", parseSize(data.cpu.cur_freq.max(), "Hz"));
 		set("cpu_min_freq", parseSize(data.cpu.min_freq.max(), "Hz"));
 		set("cpu_max_freq", parseSize(data.cpu.max_freq.max(), "Hz"));
-		set("cpu_loadavg", data.loadavg);
+		set("cpu_loadavg", data.loadavg.join(", "));
 
 		let mem_used = data.memory.total - data.memory.available;
 		let mem_pp = mem_used * 100 / data.memory.total;
