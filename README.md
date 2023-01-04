@@ -1,26 +1,26 @@
 <img src="screenshots/status.png" alt="Status" width="600"/>
 
-## What is it?
+## 🧐 What is it?
 
 A simple server monitoring app written in Python.
 Designed to be lightweight, simple and pleasant to use.
 
 It utilizes virtual file systems (/proc, /sys) for resource measurements, for maximum speed & simplicity.
 
-<img src="screenshots/status-1.png" alt="Status" width="192"/>
-<img src="screenshots/status-2.png" alt="Status" width="192"/>
-<img src="screenshots/status-3.png" alt="Status" width="192"/>
+<img src="screenshots/status-1.png" alt="Status" width="216"/>
+<img src="screenshots/status-2.png" alt="Status" width="216"/>
+<img src="screenshots/status-3.png" alt="Status" width="216"/>
 <br>
-<img src="screenshots/status-4.png" alt="Status" width="192"/>
-<img src="screenshots/status-5.png" alt="Status" width="192"/>
-<img src="screenshots/status-6.png" alt="Status" width="192"/>
+<img src="screenshots/status-4.png" alt="Status" width="216"/>
+<img src="screenshots/status-5.png" alt="Status" width="216"/>
+<img src="screenshots/status-6.png" alt="Status" width="216"/>
 
-## How to host?
+## 🚀 Installation
 
 **A Linux machine is required.**
-Tested on some computers having AMD and Intel processors.
+Tested on some AMD and Intel computers.
 Moreover, seems to work fine on Raspberry Pis.
-However, virtual isolated environments might cause unexpected behaviour.
+Virtual isolated environments might cause unexpected behaviour.
 
 <u>The best way is to host it on **bare metal**</u>.
 
@@ -42,10 +42,10 @@ pip install -r requirements.txt
 python3 status.py
 ```
 
-**Status is now served on [localhost:9000](localhost:9000).**
+**Status is now served on [localhost:9000](http://localhost:9000).**
 
 
-## Configuration
+## 📝 Configuration
 
 **Note:** `config.json` file is created under first run!
 
@@ -56,14 +56,14 @@ python3 status.py
 | `server`  | `port`              | HTTP(S) port Status is listening on                                                                                                                                                                                                                                                                 |
 | `server`  | `bind_address`      | Address Status is listening on                                                                                                                                                                                                                                                                      |
 | `server`  | `domain`            | Domain name, enables HTTPS with Let's Encrypt certificates (example: `minipc.mydomain.com`)                                                                                                                                                                                                         |
-| `machine` | `network_interface` | A network interface name we want to be measured. `auto` for auto-detection, otherwise set a desired interface name, like `"eno1"`                                                                                                                                                                   |
+| `machine` | `network_interface` | A network interface name we want to be measured. `auto` for auto-detection, otherwise set a desired interface name, like `eno1`                                                                                                                                                                     |
 | `machine` | `hwmon_sensor`      | **Source of temperature values.** It's a hwmon sensor name for temperature measurement.<br>Some devices might have different sensor name (like Raspberry Pis having `cpu_thermal`).<br>**If you see unknown temperatures**, check `cat /sys/class/hwmon/*/name` for list of available sensor names. |
 | `machine` | `auto_fs`           | Auto-detect mounted disks & partitions                                                                                                                                                                                                                                                              |
 | `machine` | `disks`             | Describes which disks/partitions we want to have listed, **please see below**.<br>Ignored when `auto_fs` is set to `true`.                                                                                                                                                                          |
 | `misc`    | `aiohttp_quiet`     | Disables HTTP library exceptions and debugging stuff. For **development**, please use `false`.                                                                                                                                                                                                      |
 
 
-### Disks (manual config, works only when `auto_fs` is set to `false`)
+### 💾 Disks (manual config, works only when `auto_fs` is set to `false`)
 
 **Here's the single disk definition from default config:**
 
@@ -90,3 +90,13 @@ python3 status.py
 }
 ```
 
+## ⬇️ Updating
+
+This will reset your local changes and download the latest version from here.
+
+**Go to your working directory and type the following:**
+
+```
+git reset
+git pull
+```
