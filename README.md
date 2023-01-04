@@ -97,6 +97,6 @@ This will reset your local changes and download the latest version from here.
 **Go to your working directory and type the following:**
 
 ```
-git reset
+git reset --hard
 git pull
 ```
