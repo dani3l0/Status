@@ -91,7 +91,7 @@ async def redirector(request, handler):
         resp = await handler(request)
         return resp
 
-    except web.HTTPInternalServerError or web.HTTPForbidden:
+    except (web.HTTPInternalServerError, web.HTTPForbidden, web.HTTPNotFound):
         raise web.HTTPFound(location="/")
 
 
