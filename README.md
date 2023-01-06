@@ -49,8 +49,6 @@ python3 status.py
 
 **Note:** `config.json` file is created under first run!
 
-**IMPORTANT: <u>Do not delete</u> the config keys, otherwise app won't start!**
-
 | Section   | Key                 | Description                                                                                                                                                                                                                                                                                         |
 |-----------|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `server`  | `port`              | HTTP(S) port Status is listening on                                                                                                                                                                                                                                                                 |

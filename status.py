@@ -5,7 +5,7 @@ from aiohttp import web
 from machine import Machine
 
 
-CONFIG = {
+DEFAULT_CONFIG = {
     "server": {
         "port": 9000,
         "bind_address": "0.0.0.0",
@@ -30,16 +30,25 @@ CONFIG = {
 try:
     CONFIG = json.loads(open("config.json").read())
 except FileNotFoundError:
+    CONFIG = DEFAULT_CONFIG
     conf = open("config.json", "w")
     conf.write(json.dumps(CONFIG, indent=4))
     conf.close()
 
 
+
+def conf(section, key):
+    try:
+        return CONFIG[section][key]
+    except KeyError:
+        return DEFAULT_CONFIG[section][key]
+
+
 stat = Machine(
-    CONFIG["machine"]["disks"],
-    CONFIG["machine"]["auto_fs"],
-    CONFIG["machine"]["network_interface"],
-    CONFIG["machine"]["hwmon_sensor"]
+    conf("machine", "disks"),
+    conf("machine", "auto_fs"),
+    conf("machine", "network_interface"),
+    conf("machine", "hwmon_sensor")
 )
 
 stat_cache = {}
@@ -88,21 +97,21 @@ async def redirector(request, handler):
 
 routes.static("/", static)
 app = web.Application(middlewares=[redirector])
-app.logger.manager.disable = 100 * CONFIG["misc"]["aiohttp_quiet"]
+app.logger.manager.disable = 100 * conf("misc", "aiohttp_quiet")
 app.add_routes(routes)
 
 ssl_context = None
-if CONFIG["server"]["domain"]:
+if conf("server", "domain"):
     ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-    ssl_dir = f"/etc/letsencrypt/live/{CONFIG['server']['domain']}"
+    ssl_dir = f"/etc/letsencrypt/live/{conf('server', 'domain')}"
 
-    pubkey = CONFIG["server"]["tls_cert_path"]
+    pubkey = conf("server", "tls_cert_path")
     if not pubkey:
         pubkey = f"{ssl_dir}/fullchain.pem"
-    privkey = CONFIG["server"]["tls_key_path"]
+    privkey = conf("server", "tls_key_path")
     if not privkey:
         privkey = f"{ssl_dir}/privkey.pem"
 
     ssl_context.load_cert_chain(pubkey, privkey)
 
-web.run_app(app, host=CONFIG["server"]["bind_address"], port=CONFIG["server"]["port"], ssl_context=ssl_context)
+web.run_app(app, host=conf("server", "bind_address"), port=conf("server", "port"), ssl_context=ssl_context)
