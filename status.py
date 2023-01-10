@@ -1,3 +1,4 @@
+import os
 import ssl
 import json
 from time import time
@@ -26,12 +27,17 @@ DEFAULT_CONFIG = {
     }
 }
 
+try:
+    config_path = os.environ["STATUS_CONFIG_PATH"]
+except KeyError:
+    config_path = "config.json"
+
 
 try:
-    CONFIG = json.loads(open("config.json").read())
+    CONFIG = json.loads(open(config_path).read())
 except FileNotFoundError:
     CONFIG = DEFAULT_CONFIG
-    conf = open("config.json", "w")
+    conf = open(config_path, "w")
     conf.write(json.dumps(CONFIG, indent=4))
     conf.close()
 

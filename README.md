@@ -47,6 +47,8 @@ python3 status.py
 
 ## 📝 Configuration
 
+Set `STATUS_CONFIG_PATH` environment variable for custom config path.
+
 **Note:** `config.json` file is created under first run!
 
 | Section   | Key                 | Description                                                                                                                                                                                                                                                                                         |
