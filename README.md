@@ -7,6 +7,8 @@ Designed to be lightweight, simple and pleasant to use.
 
 It utilizes virtual file systems (/proc, /sys) for resource measurements, for maximum speed & simplicity.
 
+[Live demo](https://status-ksk5.onrender.com/)
+
 <img src="screenshots/status-1.png" alt="Status" width="216"/>
 <img src="screenshots/status-2.png" alt="Status" width="216"/>
 <img src="screenshots/status-3.png" alt="Status" width="216"/>
