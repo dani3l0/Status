@@ -155,7 +155,10 @@ function fetchData() {
 		}
 		if (Math.abs(cpu_temp) == Infinity) {
 			set("cpu_temperature", `Unknown`);
-			set("cpu_brief", `${cpu_util}%, ${parseSize(data.cpu.cur_freq.max(), "Hz")}`);
+			if (Math.abs(data.cpu.cur_freq.max()) != Infinity) {
+				set("cpu_brief", `${cpu_util}%, ${parseSize(data.cpu.cur_freq.max(), "Hz")}`);
+			}
+			else set("cpu_brief", `${cpu_util}%`);
 		}
 		else {
 			set("cpu_temperature", `${cpu_temp} °C`);
