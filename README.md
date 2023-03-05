@@ -7,15 +7,7 @@ Designed to be lightweight, simple and pleasant to use.
 
 It utilizes virtual file systems (/proc, /sys) for resource measurements, for maximum speed & simplicity.
 
-[Live demo](https://status-ksk5.onrender.com/)
-
-<img src="screenshots/status-1.png" alt="Status" width="216"/>
-<img src="screenshots/status-2.png" alt="Status" width="216"/>
-<img src="screenshots/status-3.png" alt="Status" width="216"/>
-<br>
-<img src="screenshots/status-4.png" alt="Status" width="216"/>
-<img src="screenshots/status-5.png" alt="Status" width="216"/>
-<img src="screenshots/status-6.png" alt="Status" width="216"/>
+[Live demo](https://status-ksk5.onrender.com/) (give it a while to load, as Render suspends unused apps)
 
 ## 🚀 Installation
 
