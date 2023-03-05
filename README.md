@@ -29,7 +29,7 @@ Virtual isolated environments might cause unexpected behaviour.
 ### Clone the repo:
 
 ```
-git clone https://gitlab.com/dani3l0/status && cd status
+git clone https://github.com/dani3l0/Status && cd Status
 ```
 
 ### Install required dependenc(y):
