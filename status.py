@@ -7,8 +7,8 @@ machine = Machine()
 
 
 async def get_status():
-    info = await machine.get_full_info()
-    return info
+	info = await machine.get_full_info()
+	return info
 
 
 routes = web.RouteTableDef()
@@ -16,25 +16,25 @@ routes = web.RouteTableDef()
 
 @routes.get("/")
 async def index(request):
-    return web.FileResponse("static/index.html")
+	return web.FileResponse("static/index.html")
 
 
 @routes.get("/api/status")
 async def api(request):
-    try:
-        return web.json_response(await get_status())
-    except:
-        return web.Response(text=traceback.format_exc(), status=500)
+	try:
+		return web.json_response(await get_status())
+	except:
+		return web.Response(text=traceback.format_exc(), status=500)
 
 
 @web.middleware
 async def redirector(request, handler):
-    try:
-        resp = await handler(request)
-        return resp
+	try:
+		resp = await handler(request)
+		return resp
 
-    except (web.HTTPInternalServerError, web.HTTPForbidden, web.HTTPNotFound):
-        raise web.HTTPFound(location="/")
+	except (web.HTTPInternalServerError, web.HTTPForbidden, web.HTTPNotFound):
+		raise web.HTTPFound(location="/")
 
 
 routes.static("/", "static")
