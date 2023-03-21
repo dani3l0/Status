@@ -13,6 +13,11 @@ This is a rewritten version of Status. Targets:
 ⚖️ More stability
 
 
+### What now works
+
+Running `status.py` hosts a webserver with accessible API available at `/api/status`.
+
+
 ### Todo
 
 Before the next stable release.
