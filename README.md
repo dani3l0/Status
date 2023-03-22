@@ -17,18 +17,20 @@ This is a rewritten version of Status. Targets:
 
 Running `status.py` hosts a webserver with accessible API available at `/api/status`.
 
+On root location, a dummy frontend will show up.
+
 
 ### Todo
 
 Before the next stable release.
 
-- [ ] Frontend concept, layout & style
+- [x] Frontend concept, layout & style
 
-- [ ] Frontend mechanics
+- [ ] Create dummy frontend
 
 - [ ] Animations
 
-- [ ] Cool charts
+- [ ] Candies and fireworks
 
 - [ ] Optimizations
 

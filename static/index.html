@@ -10,5 +10,220 @@
 	<script type="text/javascript" src="js/utils.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
-<body></body>
+<body>
+	<!-- Main screen -->
+	<div class="screen" id="main">
+		<div class="wrapper">
+			<div style="font-size: 64px; font-weight: normal; text-align: center; margin-top: 128px;">Status</div>
+			<div class="darken" style="text-align: center; margin-bottom: 108px;">Development Preview, UI is not functional yet</div>
+			<div class="contents">
+				<div class="list">
+					<div class="item clickable" onclick="goto('cpu')">
+						<div class="icon">memory</div>
+						<div class="text">
+							<div class="name">CPU</div>
+							<div class="value">4%, 39 *C</div>
+						</div>
+					</div>
+					<div class="item clickable" onclick="goto('memory')">
+						<div class="icon">memory_alt</div>
+						<div class="text">
+							<div class="name">Memory</div>
+							<div class="value">32% of 3.23 GB</div>
+						</div>
+					</div>
+					<div class="item clickable" onclick="goto('storage')">
+						<div class="icon">hard_drive</div>
+						<div class="text">
+							<div class="name">Storage</div>
+							<div class="value">74% of 6.11 TB</div>
+						</div>
+					</div>
+					<div class="item clickable" onclick="goto('network')">
+						<div class="icon">memory</div>
+						<div class="text">
+							<div class="name">Network</div>
+							<div class="value">430 Mbit/s</div>
+						</div>
+					</div>
+					<div class="item clickable" onclick="goto('host')">
+						<div class="icon">memory</div>
+						<div class="text">
+							<div class="name">Host</div>
+							<div class="value">Debian GNU/Linux 11 (bullseye)</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- CPU screen -->
+	<div class="screen hidden" id="cpu">
+		<div class="wrapper">
+			<div class="header">
+				<div class="icon back"></div>
+				<div class="title">CPU</div>
+			</div>
+			<div class="contents">
+				<div class="big">
+					<div class="value">12%</div>
+					<div class="text">AMD Ryzen Threadripper 2137xx</div>
+					<div class="text">Base speed: 16 × 2.00 GHz</div>
+				</div>
+				<div class="list">
+					<div class="item">
+						<div class="icon">thermostat</div>
+						<div class="text">
+							<div class="name">Temperature</div>
+							<div class="value">Current: 39 *C</div>
+							<div class="value">Meltdown: 100 *C</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="icon">speed</div>
+						<div class="text">
+							<div class="name">Speed</div>
+							<div class="value">Current: 920 MHz</div>
+							<div class="value">Range: 800 MHz - 2.80 GHz</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Memory screen -->
+	<div class="screen hidden" id="memory">
+		<div class="wrapper">
+			<div class="header">
+				<div class="icon back"></div>
+				<div class="title">Memory</div>
+			</div>
+			<div class="contents">
+				<div class="big">
+					<div class="value">32%</div>
+					<div class="text">Using 1.05 GB of 3.23 GB</div>
+					<div class="text">2.17 GB is available</div>
+				</div>
+				<div class="list">
+					<div class="item">
+						<div class="icon">extension</div>
+						<div class="text">
+							<div class="name">Swap</div>
+							<div class="value">Using 122 MB of 2.00 GB</div>
+							<div class="value">1.88 GB is available</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="icon">sync</div>
+						<div class="text">
+							<div class="name">Cached</div>
+							<div class="value">1.22 GB</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Storage screen -->
+	<div class="screen hidden" id="storage">
+		<div class="wrapper">
+			<div class="header">
+				<div class="icon back"></div>
+				<div class="title">Storage</div>
+			</div>
+			<div class="contents">
+				<div class="big">
+					<div class="value">74%</div>
+					<div class="text">Using 4.79 TB of 6.11 TB</div>
+					<div class="text">1.37 TB is available</div>
+				</div>
+				<div class="list">
+					<div class="item">
+						<div class="icon">settings</div>
+						<div class="text">
+							<div class="name">OS</div>
+							<div class="value">Using 5.22 GB of 16.00 GB</div>
+							<div class="value">10.78 GB is available</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="icon">folder</div>
+						<div class="text">
+							<div class="name">Files</div>
+							<div class="value">Using 122 GB of 976 GB</div>
+							<div class="value">778 GB is available</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="icon">restore</div>
+						<div class="text">
+							<div class="name">BACKUP</div>
+							<div class="value">Using 4.00 TB of 4.88 TB</div>
+							<div class="value">879 GB is available</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Network screen -->
+	<div class="screen hidden" id="network">
+		<div class="wrapper">
+			<div class="header">
+				<div class="icon back"></div>
+				<div class="title">Network</div>
+			</div>
+			<div class="contents">
+				<div class="big">
+					<div class="value">Soon!</div>
+					<div class="text">...well I have no idea for that, yet.<br>This page needs to be easy & clean but still remain very functional.<br>Oh, it's late. Goodnight.</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Host screen -->
+	<div class="screen hidden" id="host">
+		<div class="wrapper">
+			<div class="header">
+				<div class="icon back"></div>
+				<div class="title">Host</div>
+			</div>
+			<div class="contents">
+				<div class="big">
+					<div class="value">MiniPC</div>
+					<div class="text">on Linux</div>
+				</div>
+				<div class="list">
+					<div class="item">
+						<div class="icon">settings</div>
+						<div class="text">
+							<div class="name">Host OS</div>
+							<div class="value">Debian GNU/Linux 11 bullseye</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="icon">timer</div>
+						<div class="text">
+							<div class="name">Uptime</div>
+							<div class="value">13 days 9 hours 22 minutes</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="icon">memory</div>
+						<div class="text">
+							<div class="name">App memory</div>
+							<div class="value">31.1 MB</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
 </html>

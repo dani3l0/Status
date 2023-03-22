@@ -1,0 +1,151 @@
+@import url(../fonts/MaterialSymbols/MaterialSymbols.css);
+@import url(../fonts/Quicksand/Quicksand.css);
+
+body {
+	background: #000;
+	color: #FFF;
+	margin: 0;
+	user-select: none;
+	font-size: 14px;
+	font-family: "Quicksand", sans-serif;
+	font-weight: bold;
+	overflow: hidden;
+	-webkit-tap-highlight-color: transparent;
+}
+
+
+/* Dynamic paging */
+.screen {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow-y: scroll;
+	scrollbar-width: 0;
+	transition: all .5s;
+}
+.screen::-webkit-scrollbar {
+	display: none;
+}
+.screen.hidden {
+	transform: translateX(128px);
+	opacity: 0;
+	visibility: hidden;
+}
+.screen#main.hidden {
+	transform: translateX(-128px);
+}
+
+.screen .wrapper {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 50%;
+	max-width: 640px;
+	transform: translateX(-50%);
+}
+
+.header {
+	padding: 8px 4px;
+	display: flex;
+	align-items: center;
+}
+.header .icon.back {
+	border: 1px solid #181818;
+	padding: 12px;
+	cursor: pointer;
+	border-radius: 100px;
+	margin-right: 10px;
+	transition: all .2s;
+}
+.header .icon.back:hover {
+	background: #282828;
+}
+.header .title {
+	font-size: 22px;
+}
+
+
+/* Universal UI Stuff */
+.clickable {
+	cursor: pointer;
+}
+.darken {
+	color: #888;
+}
+
+
+/* UI Components */
+button, .button {
+	background: #79F;
+	color: #222;
+	margin: 4px 3px;
+	outline: none;
+	border: none;
+	font-weight: inherit;
+	padding: 12px 16px;
+	border-radius: 32px;
+	cursor: pointer;
+	font-family: inherit;
+	font-size: inherit;
+	transition: all .2s;
+}
+button:hover, .button:hover {
+	background: #8AF;
+}
+button.danger, .button.danger {
+	background: #F77;
+}
+button.danger:hover, .button.danger:hover {
+	background: #F88;
+}
+
+.list {
+	padding: 6px;
+	background: #181818;
+	border-radius: 24px;
+	margin: 8px;
+}
+.list .item {
+	display: flex;
+	align-items: center;
+	margin-bottom: 6px;
+	border-radius: 20px;
+	padding: 12px;
+	transition: all .2s;
+}
+.list .item:last-child {
+	margin: 0;
+}
+.list .item.clickable:hover {
+	background: #282828;
+}
+.list .item .icon {
+	margin-right: 16px;
+	font-size: 24px;
+	color: #222;
+	background: #B8F;
+	padding: 10px;
+	border-radius: 12px;
+}
+.list .item .name {
+	font-size: 16px;
+	margin-bottom: 1px;
+}
+.list .item .value {
+	color: #999;
+}
+
+.big {
+	margin: 96px 4px;
+	text-align: center;
+}
+.big .value {
+	font-size: 80px;
+	font-weight: normal;
+}
+.big .text {
+	color: #999;
+}
