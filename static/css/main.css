@@ -67,6 +67,10 @@ body {
 	font-size: 22px;
 }
 
+.contents {
+	padding-bottom: 48px;
+}
+
 
 /* Universal UI Stuff */
 .clickable {
@@ -148,4 +152,23 @@ button.danger:hover, .button.danger:hover {
 }
 .big .text {
 	color: #999;
+}
+
+.sided {
+	display: flex;
+	align-items: center;
+	margin-bottom: 40px;
+}
+.sided > div {
+	width: 50%;
+	text-align: center;
+}
+.sided .icon {
+	font-size: 48px;
+}
+.sided .title {
+	font-size: 18px;
+}
+.sided .value {
+	opacity: .6;
 }
