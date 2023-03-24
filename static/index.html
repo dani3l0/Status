@@ -40,14 +40,14 @@
 						</div>
 					</div>
 					<div class="item clickable" onclick="goto('network')">
-						<div class="icon">memory</div>
+						<div class="icon">settings_ethernet</div>
 						<div class="text">
 							<div class="name">Network</div>
 							<div class="value">430 Mbit/s</div>
 						</div>
 					</div>
 					<div class="item clickable" onclick="goto('host')">
-						<div class="icon">memory</div>
+						<div class="icon">cloud</div>
 						<div class="text">
 							<div class="name">Host</div>
 							<div class="value">Debian GNU/Linux 11 (bullseye)</div>
@@ -66,10 +66,14 @@
 				<div class="title">CPU</div>
 			</div>
 			<div class="contents">
-				<div class="big">
-					<div class="value">12%</div>
-					<div class="text">AMD Ryzen Threadripper 2137xx</div>
-					<div class="text">Base speed: 16 × 2.00 GHz</div>
+				<div class="bar">
+					<div class="text">
+						<div class="value">12</div>
+						<div class="unit">%</div>
+						<div class="right">Speed: 1.59 GHz</div>
+					</div>
+					<div class="progress" style="--value: 12%"></div>
+					<div class="desc">AMD Ryzen Threadripper 2137xx</div>
 				</div>
 				<div class="list">
 					<div class="item">
@@ -81,11 +85,25 @@
 						</div>
 					</div>
 					<div class="item">
+						<div class="icon">numbers</div>
+						<div class="text">
+							<div class="name">Count</div>
+							<div class="value">6 cores, 12 threads</div>
+						</div>
+					</div>
+					<div class="item">
 						<div class="icon">speed</div>
 						<div class="text">
 							<div class="name">Speed</div>
-							<div class="value">Current: 920 MHz</div>
+							<div class="value">Base: 2.20 GHz</div>
 							<div class="value">Range: 800 MHz - 2.80 GHz</div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="icon">cached</div>
+						<div class="text">
+							<div class="name">Cache size</div>
+							<div class="value">12 MB</div>
 						</div>
 					</div>
 				</div>
@@ -101,10 +119,14 @@
 				<div class="title">Memory</div>
 			</div>
 			<div class="contents">
-				<div class="big">
-					<div class="value">32%</div>
-					<div class="text">Using 1.05 GB of 3.23 GB</div>
-					<div class="text">2.17 GB is available</div>
+				<div class="bar">
+					<div class="text">
+						<div class="value">1.05</div>
+						<div class="unit">GB</div>
+						<div class="right">3.23 GB in total</div>
+					</div>
+					<div class="progress" style="--value: 35%"></div>
+					<div class="desc">2.17 GB is available</div>
 				</div>
 				<div class="list">
 					<div class="item">
@@ -122,6 +144,13 @@
 							<div class="value">1.22 GB</div>
 						</div>
 					</div>
+					<div class="item">
+						<div class="icon">account_tree</div>
+						<div class="text">
+							<div class="name">Processes</div>
+							<div class="value">78</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -135,10 +164,14 @@
 				<div class="title">Storage</div>
 			</div>
 			<div class="contents">
-				<div class="big">
-					<div class="value">74%</div>
-					<div class="text">Using 4.79 TB of 6.11 TB</div>
-					<div class="text">1.37 TB is available</div>
+				<div class="bar">
+					<div class="text">
+						<div class="value">4.79</div>
+						<div class="unit">TB</div>
+						<div class="right">6.11 TB in total</div>
+					</div>
+					<div class="progress" style="--value: 74%"></div>
+					<div class="desc">1.37 TB is available</div>
 				</div>
 				<div class="list">
 					<div class="item">
@@ -178,10 +211,6 @@
 				<div class="title">Network</div>
 			</div>
 			<div class="contents">
-				<div class="big">
-					<div class="value">447 Mbit/s</div>
-					<div class="text">58.3 MB/s</div>
-				</div>
 				<div class="sided">
 					<div class="left">
 						<div class="icon">arrow_circle_up</div>
@@ -231,11 +260,14 @@
 				<div class="title">Host</div>
 			</div>
 			<div class="contents">
-				<div class="big">
-					<div class="value">MiniPC</div>
-					<div class="text">on Linux</div>
-				</div>
 				<div class="list">
+					<div class="item">
+						<div class="icon">text_format</div>
+						<div class="text">
+							<div class="name">Device name</div>
+							<div class="value">MiniPC</div>
+						</div>
+					</div>
 					<div class="item">
 						<div class="icon">settings</div>
 						<div class="text">
