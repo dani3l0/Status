@@ -67,15 +67,7 @@
 				<div class="title">CPU</div>
 			</div>
 			<div class="contents">
-				<div class="bar">
-					<div class="text">
-						<div class="value">12</div>
-						<div class="unit">%</div>
-						<div class="right">Speed: 1.59 GHz</div>
-					</div>
-					<div class="progress" style="--value: 12%"></div>
-					<div class="desc">AMD Ryzen Threadripper 2137xx</div>
-				</div>
+				<div class="bar" id="cpu-bar"></div>
 				<div class="list" id="cpu-list"></div>
 			</div>
 		</div>
@@ -89,15 +81,7 @@
 				<div class="title">Memory</div>
 			</div>
 			<div class="contents">
-				<div class="bar">
-					<div class="text">
-						<div class="value">1.05</div>
-						<div class="unit">GB</div>
-						<div class="right">3.23 GB in total</div>
-					</div>
-					<div class="progress" style="--value: 35%"></div>
-					<div class="desc">2.17 GB is available</div>
-				</div>
+				<div class="bar" id="mem-bar"></div>
 				<div class="list" id="mem-list"></div>
 			</div>
 		</div>
@@ -111,15 +95,7 @@
 				<div class="title">Storage</div>
 			</div>
 			<div class="contents">
-				<div class="bar">
-					<div class="text">
-						<div class="value">4.79</div>
-						<div class="unit">TB</div>
-						<div class="right">6.11 TB in total</div>
-					</div>
-					<div class="progress" style="--value: 74%"></div>
-					<div class="desc">1.37 TB is available</div>
-				</div>
+				<div class="bar" id="storage-bar"></div>
 				<div class="list" id="storage-list"></div>
 			</div>
 		</div>
@@ -136,16 +112,16 @@
 				<div class="sided">
 					<div class="left">
 						<div class="icon">arrow_circle_up</div>
-						<div class="title">430 Mbit/s</div>
-						<div class="value">57.0 MB/s</div>
+						<div class="title" id="net-up-speed">N/A Mbit/s</div>
+						<div class="value" id="net-up-speed-bytes">N/A MB/s</div>
 					</div>
 					<div class="right">
 						<div class="icon">arrow_circle_down</div>
-						<div class="title">17 Mbit/s</div>
-						<div class="value">2.14 MB/s</div>
+						<div class="title" id="net-down-speed">N/A Mbit/s</div>
+						<div class="value" id="net-down-speed-bytes">N/A MB/s</div>
 					</div>
 				</div>
-				<div class="list" id="list-net"></div>
+				<div class="list" id="net-list"></div>
 			</div>
 		</div>
 	</div>

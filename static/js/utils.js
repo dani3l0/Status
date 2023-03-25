@@ -105,3 +105,31 @@ function mkItem(target, id, icon, name, values) {
 		}
 	}
 }
+
+function mkBar(div, progress, value, unit, right, desc) {
+	let target = get(div)
+	if (!target.children.length) {
+		let _text = mkDiv({className: "text"})
+		let _value = mkDiv({className: "value"})
+		let _unit = mkDiv({className: "unit"})
+		let _right = mkDiv({className: "right"})
+		let _progress = mkDiv({className: "progress"})
+		let _desc = mkDiv({className: "desc"})
+		_text.appendChild(_value)
+		_text.appendChild(_unit)
+		_text.appendChild(_right)
+		target.appendChild(_text)
+		target.appendChild(_progress)
+		target.appendChild(_desc)
+	}
+	let _value = target.getElementsByClassName("value")[0]
+	let _unit = target.getElementsByClassName("unit")[0]
+	let _right = target.getElementsByClassName("right")[0]
+	let _desc = target.getElementsByClassName("desc")[0]
+	let _progress = target.getElementsByClassName("progress")[0]
+	_value.innerText = value
+	_unit.innerText = unit
+	_right.innerText = right
+	_desc.innerText = desc
+	_progress.style.setProperty("--value", `${progress * 100}%`)
+}

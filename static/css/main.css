@@ -183,6 +183,7 @@ body {
 	width: var(--value);
 	height: 100%;
 	background: #D6D6D6;
+	transition: all .7s;
 }
 .bar .desc {
 	color: #888;

@@ -1,12 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
 	loadBackButtons()
 	update()
-	setInterval(update, 2000)
+	setInterval(update, 1500)
 })
 
 function loadBackButtons() {
 	let buttons = getClasses("back")
-	for (button of buttons) {
+	for (let button of buttons) {
 		button.onclick = () => {
 			goto("main")
 		}
@@ -31,9 +31,9 @@ function update() {
 
 function parseData(resp) {
 	let data = JSON.parse(resp.responseText)
-	console.log(data.host)
 	updateCPU(data.cpu)
 	updateMem(data.memory)
 	updateStorage(data.storage)
+	updateNet(data.network)
 	updateHost(data.host)
 }

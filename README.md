@@ -32,7 +32,7 @@ Before the next stable release.
 
 - [ ] Optimizations
 
-- [ ] Link Frontend to Backend
+- [x] Link Frontend to Backend
 
 - [ ] Flexible config
 
