@@ -8,6 +8,7 @@
 	<link href="img/icon.png" rel="icon">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript" src="js/parser.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
@@ -75,38 +76,7 @@
 					<div class="progress" style="--value: 12%"></div>
 					<div class="desc">AMD Ryzen Threadripper 2137xx</div>
 				</div>
-				<div class="list">
-					<div class="item">
-						<div class="icon">thermostat</div>
-						<div class="text">
-							<div class="name">Temperature</div>
-							<div class="value">Current: 39 *C</div>
-							<div class="value">Meltdown: 100 *C</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">numbers</div>
-						<div class="text">
-							<div class="name">Count</div>
-							<div class="value">6 cores, 12 threads</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">speed</div>
-						<div class="text">
-							<div class="name">Speed</div>
-							<div class="value">Base: 2.20 GHz</div>
-							<div class="value">Range: 800 MHz - 2.80 GHz</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">cached</div>
-						<div class="text">
-							<div class="name">Cache size</div>
-							<div class="value">12 MB</div>
-						</div>
-					</div>
-				</div>
+				<div class="list" id="cpu-list"></div>
 			</div>
 		</div>
 	</div>
@@ -128,30 +98,7 @@
 					<div class="progress" style="--value: 35%"></div>
 					<div class="desc">2.17 GB is available</div>
 				</div>
-				<div class="list">
-					<div class="item">
-						<div class="icon">extension</div>
-						<div class="text">
-							<div class="name">Swap</div>
-							<div class="value">Using 122 MB of 2.00 GB</div>
-							<div class="value">1.88 GB is available</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">sync</div>
-						<div class="text">
-							<div class="name">Cached</div>
-							<div class="value">1.22 GB</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">account_tree</div>
-						<div class="text">
-							<div class="name">Processes</div>
-							<div class="value">78</div>
-						</div>
-					</div>
-				</div>
+				<div class="list" id="mem-list"></div>
 			</div>
 		</div>
 	</div>
@@ -173,32 +120,7 @@
 					<div class="progress" style="--value: 74%"></div>
 					<div class="desc">1.37 TB is available</div>
 				</div>
-				<div class="list">
-					<div class="item">
-						<div class="icon">settings</div>
-						<div class="text">
-							<div class="name">OS</div>
-							<div class="value">Using 5.22 GB of 16.00 GB</div>
-							<div class="value">10.78 GB is available</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">folder</div>
-						<div class="text">
-							<div class="name">Files</div>
-							<div class="value">Using 122 GB of 976 GB</div>
-							<div class="value">778 GB is available</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">restore</div>
-						<div class="text">
-							<div class="name">BACKUP</div>
-							<div class="value">Using 4.00 TB of 4.88 TB</div>
-							<div class="value">879 GB is available</div>
-						</div>
-					</div>
-				</div>
+				<div class="list" id="storage-list"></div>
 			</div>
 		</div>
 	</div>
@@ -223,31 +145,7 @@
 						<div class="value">2.14 MB/s</div>
 					</div>
 				</div>
-				<div class="list">
-					<div class="item">
-						<div class="icon">speed</div>
-						<div class="text">
-							<div class="name">Connection speed</div>
-							<div class="value">1.00 Gbit/s</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">arrow_upward</div>
-						<div class="text">
-							<div class="name">Upload</div>
-							<div class="value">56.1 GB since boot</div>
-							<div class="value">Approx. 4.78 GB daily</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">arrow_downward</div>
-						<div class="text">
-							<div class="name">Download</div>
-							<div class="value">123.9 GB since boot</div>
-							<div class="value">Approx. 9.60 GB daily</div>
-						</div>
-					</div>
-				</div>
+				<div class="list" id="list-net"></div>
 			</div>
 		</div>
 	</div>
@@ -260,36 +158,7 @@
 				<div class="title">Host</div>
 			</div>
 			<div class="contents">
-				<div class="list">
-					<div class="item">
-						<div class="icon">text_format</div>
-						<div class="text">
-							<div class="name">Device name</div>
-							<div class="value">MiniPC</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">settings</div>
-						<div class="text">
-							<div class="name">Host OS</div>
-							<div class="value">Debian GNU/Linux 11 bullseye</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">timer</div>
-						<div class="text">
-							<div class="name">Uptime</div>
-							<div class="value">13 days 9 hours 22 minutes</div>
-						</div>
-					</div>
-					<div class="item">
-						<div class="icon">memory</div>
-						<div class="text">
-							<div class="name">App memory</div>
-							<div class="value">31.1 MB</div>
-						</div>
-					</div>
-				</div>
+				<div class="list" id="host-list"></div>
 			</div>
 		</div>
 	</div>

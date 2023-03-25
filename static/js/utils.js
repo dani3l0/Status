@@ -62,3 +62,46 @@ function mkTime(seconds) {
 	if (nice == "") nice = "Booted just now"
 	return nice
 }
+
+function strToArray(str) {
+	if (typeof(str) == "string") str = [str]
+	else if (typeof(str) != "object") str = []
+	return str
+}
+
+function mkDiv(args) {
+	let div = document.createElement("div")
+	if (args.id) div.id = args.id
+	if (args.className) div.className = args.className
+	if (args.text) {
+		if (args.raw_html) div.innerHTML = args.text
+		else div.innerText = args.text
+	}
+	return div;
+}
+
+function mkItem(target, id, icon, name, values) {
+	values = strToArray(values)
+	if (values == []) return;
+	id = `${target}-${id}`
+	if (!get(id)) {
+		let _target = get(target)
+		let _item = mkDiv({className: "item", id})
+		let _icon = mkDiv({className: "icon", text: icon})
+		let _text = mkDiv({className: "text"})
+		let _name = mkDiv({className: "name", text: name})
+		_text.appendChild(_name)
+		for (let val of values) {
+			_text.appendChild(mkDiv({className: "value", text: val}))
+		}
+		_item.appendChild(_icon)
+		_item.appendChild(_text)
+		_target.appendChild(_item)
+	}
+	else {
+		let divs = get(id).getElementsByClassName("value")
+		for (let i = 0; i < divs.length; i++) {
+			divs[i].innerText = values[i]
+		}
+	}
+}

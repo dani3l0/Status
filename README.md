@@ -15,9 +15,9 @@ This is a rewritten version of Status. Targets:
 
 ### What now works
 
-Running `status.py` hosts a webserver with accessible API available at `/api/status`.
+Status should now work as expected. Expect bugs as a large amount of changes was made to this project. Breakages will still occur.
 
-On root location, a dummy frontend will show up.
+After thorough tests and bug fixes it will be released as stable.
 
 
 ### Todo
@@ -26,11 +26,9 @@ Before the next stable release.
 
 - [x] Frontend concept, layout & style
 
-- [ ] Create dummy frontend
+- [x] Create dummy frontend
 
-- [ ] Animations
-
-- [ ] Candies and fireworks
+- [x] Animations
 
 - [ ] Optimizations
 
@@ -40,6 +38,4 @@ Before the next stable release.
 
 - [ ] Backend optimizations
 
-- [ ] Bandwidth optimizations (as more data is sent)
-
-- [ ] So much other stuff
+- [ ] Form a final API
