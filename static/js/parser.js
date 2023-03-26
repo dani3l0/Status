@@ -11,7 +11,7 @@ function updateCPU(cpu) {
 		`Meltdown: ${temps_meltdown.min()} °C`
 	])
 	mkItem("cpu-list", "count", "numbers", "Core count", [
-		`??? cores, ${cpu.count} thread${s(cpu.count)}`
+		`${cpu.cores} core${s(cpu.cores)}, ${cpu.count} thread${s(cpu.count)}`
 	])
 	let freq = [],
 		freq_base = [],
@@ -33,7 +33,7 @@ function updateCPU(cpu) {
 		`Base: ${parseSize(freq_base, "Hz")}`
 	])
 	mkItem("cpu-list", "cache", "cached", "Cache size", [
-		"???"
+		parseSize(cpu.cache, "B")
 	])
 	mkBar("cpu-bar",
 		cpu.utilisation, Math.round(cpu.utilisation * 100), "%",
@@ -53,7 +53,7 @@ function updateMem(mem) {
 		parseSize(mem.cached, "B")
 	])
 	mkItem("mem-list", "procs", "account_tree", "Processes", [
-		"???"
+		mem.processes
 	])
 	let m = parseSize(mem_used, "B").split(" ")
 	mkBar("mem-bar",

@@ -14,7 +14,10 @@ cpu_thermals = [
 
 class CPU:
 	def __init__(self):
-		self.cpu_model = self.get_cpu_model()
+		cpu_info = self.get_cpu_info()
+		self.cpu_model = cpu_info["model"]
+		self.cpu_cache = cpu_info["cache"]
+		self.cores = cpu_info["cores"]
 
 	async def get_full_info(self):
 		return {
@@ -22,7 +25,9 @@ class CPU:
 			"utilisation": (await self.get_utilisation()),
 			"temperatures": self.get_temperatures(),
 			"frequencies": self.get_frequencies(),
-			"count": self.get_cores()
+			"count": self.get_count(),
+			"cache": self.cpu_cache,
+			"cores": self.cores
 		}
 
 	@staticmethod
@@ -73,21 +78,27 @@ class CPU:
 		return freqs
 
 	@staticmethod
-	def get_cores():
+	def get_count():
 		return os.cpu_count()
 
 	@staticmethod
-	def get_cpu_model():
-		cpu_info = get("/proc/cpuinfo")
+	def get_cpu_info():
 		cpu_model = "Unknown"
+		cache_size = None
+		cores = 1
+		cpu_info = get("/proc/cpuinfo")
 		for line in cpu_info.split("\n"):
 			if "model name" in line:
 				cpu_model = re.sub(".*model name.*:", "", line, 1).strip()
-				break
-			elif "Model" in line:
-				cpu_model = re.sub(".*Model.*:", "", line, 1).strip()
-				break
-		return cpu_model
+			if "cache size" in line:
+				cache_size = re.sub(".*cache size.*:", "", line, 1).strip().split(" ")[0]
+			if "cpu cores" in line:
+				cores = re.sub(".*cpu cores.*:", "", line, 1).strip()
+		return {
+			"model": cpu_model,
+			"cache": int(cache_size),
+			"cores": int(cores)
+		}
 
 
 def get_stat():
