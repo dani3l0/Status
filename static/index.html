@@ -16,42 +16,42 @@
 	<div class="screen" id="main">
 		<div class="wrapper">
 			<div style="font-size: 64px; font-weight: normal; text-align: center; margin-top: 128px;">Status</div>
-			<div class="darken" style="text-align: center; margin-bottom: 108px;">Development Preview, UI is not functional yet</div>
+			<div class="darken" style="text-align: center; margin-bottom: 108px;">Early alpha version</div>
 			<div class="contents">
 				<div class="list">
 					<div class="item clickable" onclick="goto('cpu')">
 						<div class="icon">memory</div>
 						<div class="text">
 							<div class="name">CPU</div>
-							<div class="value">4%, 39 *C</div>
+							<div class="value" id="main-cpu">N/A</div>
 						</div>
 					</div>
 					<div class="item clickable" onclick="goto('memory')">
 						<div class="icon">memory_alt</div>
 						<div class="text">
 							<div class="name">Memory</div>
-							<div class="value">32% of 3.23 GB</div>
+							<div class="value" id="main-mem">N/A</div>
 						</div>
 					</div>
 					<div class="item clickable" onclick="goto('storage')">
 						<div class="icon">hard_drive</div>
 						<div class="text">
 							<div class="name">Storage</div>
-							<div class="value">74% of 6.11 TB</div>
+							<div class="value" id="main-storage">N/A</div>
 						</div>
 					</div>
 					<div class="item clickable" onclick="goto('network')">
 						<div class="icon">settings_ethernet</div>
 						<div class="text">
 							<div class="name">Network</div>
-							<div class="value">430 Mbit/s</div>
+							<div class="value" id="main-network">N/A</div>
 						</div>
 					</div>
 					<div class="item clickable" onclick="goto('host')">
 						<div class="icon">cloud</div>
 						<div class="text">
 							<div class="name">Host</div>
-							<div class="value">Debian GNU/Linux 11 (bullseye)</div>
+							<div class="value" id="main-host">N/A</div>
 						</div>
 					</div>
 				</div>

@@ -40,6 +40,7 @@ function updateCPU(cpu) {
 		`Speed: ${parseSize(freq, "Hz")}`,
 		cpu.model
 	)
+	set("main-cpu", `${Math.round(cpu.utilisation * 100)}%, ${parseSize(freq, "Hz")}, ${temps.max()} °C`)
 }
 
 function updateMem(mem) {
@@ -61,6 +62,7 @@ function updateMem(mem) {
 		`${parseSize(mem.total, "B")} in total`,
 		`${parseSize(mem.available, "B")} is available`
 	)
+	set("main-mem", `Using ${m.join(" ")} out of ${parseSize(mem.total, "B")}`)
 }
 
 function updateStorage(storage) {
@@ -83,11 +85,20 @@ function updateStorage(storage) {
 		`${parseSize(all_total / 1000, "B")} in total`,
 		`${parseSize(all_free / 1000, "B")} is available`
 	)
+	set("main-storage", `Using ${s.join(" ")} out of ${parseSize(all_total / 1000, "B")}`)
 }
 
-function updateNet(net) {
+function updateNet(net_last, net) {
+	let rx_diff = net.rx - net_last.rx
+	let tx_diff = net.tx - net_last.tx
+	let rx_speed = rx_diff / 1.5 / (1000 / 8)
+	let tx_speed = tx_diff / 1.5 / (1000 / 8)
+	set("net-up-speed", parseSize(tx_speed, "bit/s"))
+	set("net-up-speed-bytes", parseSize(tx_speed / 8, "B/s"))
+	set("net-down-speed", parseSize(rx_speed, "bit/s"))
+	set("net-down-speed-bytes", parseSize(rx_speed / 8, "B/s"))
 	mkItem("net-list", "speed", "speed", "Connection speed", [
-		parseSize(net.speed * 1000, "Bit/s")
+		parseSize(net.speed * 1000, "bit/s")
 	])
 	mkItem("net-list", "upload", "arrow_upward", "Upload", [
 		`${parseSize(net.tx / 1000, "B")} since boot`
@@ -95,6 +106,7 @@ function updateNet(net) {
 	mkItem("net-list", "download", "arrow_downward", "Download", [
 		`${parseSize(net.rx / 1000, "B")} since boot`
 	])
+	set("main-network", parseSize(rx_speed + tx_speed, "bit/s"))
 }
 
 function updateHost(host) {
@@ -113,4 +125,5 @@ function updateHost(host) {
 	mkItem("host-list", "loadavg", "speed", "Load averages", [
 		host.loadavg.join(", ")
 	])
+	set("main-host", host.os)
 }
