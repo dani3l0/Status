@@ -106,10 +106,11 @@ function mkDiv(args) {
 	return div;
 }
 
-function mkItem(target, icon, name, values) {
+function mkItem(target, icon, name, values, div_id) {
 	values = strToArray(values)
 	if (!values.length) return;
-	let id = `${target}-${icon}`
+	if (!div_id) div_id = icon
+	let id = `${target}-${div_id}`
 	let item = get(id)
 	let divs = (item) ? item.getElementsByClassName("value") : []
 	if (!item || divs.length != values.length) {

@@ -99,7 +99,7 @@ function updateStorage(storage) {
 		mkItem("storage-list", p.icon, disk, [
 			`Using ${parseSize(used / 1000, "B")} out of ${parseSize(p.total / 1000, "B")}`,
 			`${parseSize(p.available / 1000, "B")} is available`
-		])
+		], disk)
 
 		all_used += used
 		all_total += p.total
