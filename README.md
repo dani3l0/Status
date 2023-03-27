@@ -30,12 +30,14 @@ Before the next stable release.
 
 - [x] Animations
 
-- [ ] Optimizations
+- [x] Optimizations
 
 - [x] Link Frontend to Backend
 
 - [ ] Flexible config
 
 - [ ] Backend optimizations
+
+- [ ] Stability
 
 - [ ] Form a final API

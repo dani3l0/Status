@@ -84,7 +84,7 @@ class CPU:
 				min_freq = cpu_freq_helper(entry, "min")
 				max_freq = cpu_freq_helper(entry, "max")
 				try:
-					base_freq = get(path(entry, "cpufreq/base_frequency"), isint=True)
+					base_freq = round(get(path(entry, "cpufreq/base_frequency"), isint=True) / 1000)
 				except:
 					base_freq = None
 

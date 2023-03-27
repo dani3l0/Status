@@ -38,7 +38,8 @@ Array.prototype.min = function() {
 Array.prototype.addNode = function() {
 	let value = arguments[0]
 	let push = arguments[1]
-	if (push) this.push(value)
+	push = (Array.isArray(push)) ? push : [push]
+	if (!push.includes(null) && !push.includes(false)) this.push(value)
 }
 
 Array.prototype.append = function() {
@@ -83,13 +84,13 @@ function mkTime(seconds) {
 	if (d) nice += `${d} day${s(d)} `
 	if (h) nice += `${h} hour${s(h)} `
 	if (m) nice += `${m} minute${s(m)} `
-	if (nice == "") nice = "Booted just now"
+	if (nice == "") nice = "Less than a minute"
 	return nice
 }
 
 function strToArray(str) {
 	if (typeof(str) == "string") str = [str]
-	else if (typeof(str) != "object") str = []
+	else if (!Array.isArray(str)) str = []
 	return str
 }
 
@@ -104,11 +105,10 @@ function mkDiv(args) {
 	return div;
 }
 
-function mkItem(target, id, icon, name, values) {
+function mkItem(target, icon, name, values) {
 	values = strToArray(values)
-	values = values.filter(item => item !== null)
-	if (values == []) return;
-	id = `${target}-${id}`
+	if (!values.length) return;
+	id = `${target}-${icon}`
 	if (!get(id)) {
 		let _target = get(target)
 		let _item = mkDiv({className: "item", id})
