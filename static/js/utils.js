@@ -89,6 +89,7 @@ function mkTime(seconds) {
 }
 
 function strToArray(str) {
+	if (Number.isInteger(str)) str = str.toString()
 	if (typeof(str) == "string") str = [str]
 	else if (!Array.isArray(str)) str = []
 	return str
