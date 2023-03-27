@@ -109,26 +109,26 @@ function mkDiv(args) {
 function mkItem(target, icon, name, values) {
 	values = strToArray(values)
 	if (!values.length) return;
-	id = `${target}-${icon}`
-	if (!get(id)) {
+	let id = `${target}-${icon}`
+	let item = get(id)
+	let divs = (item) ? item.getElementsByClassName("value") : []
+	if (!item || divs.length != values.length) {
 		let _target = get(target)
 		let _item = mkDiv({className: "item", id})
 		let _icon = mkDiv({className: "icon", text: icon})
 		let _text = mkDiv({className: "text"})
 		let _name = mkDiv({className: "name", text: name})
 		_text.appendChild(_name)
-		for (let val of values) {
-			_text.appendChild(mkDiv({className: "value", text: val}))
+		for (let _ of values) {
+			_text.appendChild(mkDiv({className: "value"}))
 		}
 		_item.appendChild(_icon)
 		_item.appendChild(_text)
-		_target.appendChild(_item)
+		if (item) item.innerHTML = _item.innerHTML
+		else _target.appendChild(_item)
 	}
-	else {
-		let divs = get(id).getElementsByClassName("value")
-		for (let i = 0; i < divs.length; i++) {
-			divs[i].innerText = values[i]
-		}
+	for (let i = 0; i < divs.length; i++) {
+		divs[i].innerText = values[i]
 	}
 }
 
