@@ -16,14 +16,38 @@ function s(number) {
 }
 
 Array.prototype.max = function() {
-	return Math.max.apply(null, this)
+	let arr = this
+	arr = arr.filter(element => {
+		return element !== null && element !== undefined
+	})
+	let n = Math.max.apply(null, arr)
+	if (Math.abs(n) == Infinity) n = null
+	return n
 }
 
 Array.prototype.min = function() {
-	return Math.min.apply(null, this)
+	let arr = this
+	arr = arr.filter(element => {
+		return element !== null && element !== undefined
+	})
+	let n = Math.min.apply(null, arr)
+	if (Math.abs(n) == Infinity) n = null
+	return n
+}
+
+Array.prototype.addNode = function() {
+	let value = arguments[0]
+	let push = arguments[1]
+	if (push) this.push(value)
+}
+
+Array.prototype.append = function() {
+	let value = arguments[0]
+	if (value != null) this.push(value)
 }
 
 function parseSize(value, unit="") {
+	if (value == null) return null
 	let addon = "K"
 	let r_value = Math.round(value)
 	if (r_value >= 1000) {
@@ -82,6 +106,7 @@ function mkDiv(args) {
 
 function mkItem(target, id, icon, name, values) {
 	values = strToArray(values)
+	values = values.filter(item => item !== null)
 	if (values == []) return;
 	id = `${target}-${id}`
 	if (!get(id)) {
