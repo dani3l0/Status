@@ -31,7 +31,11 @@ function updateCPU(cpu) {
 
 
 	// Add to UI
-	set("main-cpu", `${Math.round(cpu.utilisation * 100)}%, ${freq}, ${temp} °C`)
+	let _values_cpu = []
+	_values_cpu.addNode(`${Math.round(cpu.utilisation * 100)}%`)
+	_values_cpu.addNode(freq, freq != "")
+	_values_cpu.addNode(`${temp} °C`, temp)
+	set("main-cpu", _values_cpu.join(", "))
 
 	mkBar("cpu-bar",
 		cpu.utilisation, Math.round(cpu.utilisation * 100), "%",
