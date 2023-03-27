@@ -1,12 +1,15 @@
 import os
 import re
+from glob import glob
 
-colors = ["#F26", "#78F", "#0D8", "#FB0", "#96F", "#F56", "#0CB", "#F60"]
 
-
-def get(path: str, isint: bool = False):
-	val = open(path, "r").read().rstrip()
-	return int(val) if isint else val
+def get(path: str, isint: bool = False, fallback = None):
+	try:
+		val = open(path, "r").read().rstrip()
+		res = int(val) if isint else val
+	except (FileNotFoundError, ValueError):
+		res = fallback
+	return res
 
 
 def grep(contents: str, keyword: str):
@@ -27,5 +30,15 @@ def ls(path: str):
 	return sorted(files)
 
 
+def ls_glob(path: str, target: str):
+	files = glob(os.path.join(path, target))
+	return sorted(files)
+
+
 def basename(path: str):
 	return path.split("/")[-1]
+
+
+def parse_temperature(temp: int, divide: bool = True):
+	if not temp: return temp
+	return temp / 1000 if divide else temp

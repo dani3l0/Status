@@ -2,6 +2,7 @@ from .utils import get, grep, ls, basename
 
 
 class Memory:
+
 	@staticmethod
 	def get_usage():
 		meminfo = get("/proc/meminfo")

@@ -1,6 +1,34 @@
 from .utils import get
 
 
+class Network:
+
+	@staticmethod
+	def get_net():
+		interface = get_default_iface_name_linux()
+		path = f"/sys/class/net/{interface}"
+
+		try:
+			rx = get(f"{path}/statistics/rx_bytes", isint=True)
+			tx = get(f"{path}/statistics/tx_bytes", isint=True)
+		except FileNotFoundError:
+			rx = 0
+			tx = 0
+
+		try:
+			speed = get(f"{path}/speed", isint=True)
+		except (OSError, FileNotFoundError):
+			speed = -1
+
+		return {
+			"interface": interface,
+			"speed": speed,
+			"rx": rx,
+			"tx": tx
+		}
+
+
+
 def get_default_iface_name_linux():
 	route = "/proc/net/route"
 	interface = None
@@ -15,26 +43,3 @@ def get_default_iface_name_linux():
 			except:
 				continue
 	return interface
-
-
-class Network:
-	@staticmethod
-	def get_net():
-		interface = get_default_iface_name_linux()
-		path = f"/sys/class/net/{interface}"
-		try:
-			rx = get(f"{path}/statistics/rx_bytes", isint=True)
-			tx = get(f"{path}/statistics/tx_bytes", isint=True)
-		except FileNotFoundError:
-			rx = 0
-			tx = 0
-		try:
-			speed = get(f"{path}/speed", isint=True)
-		except (OSError, FileNotFoundError):
-			speed = -1
-		return {
-			"interface": interface,
-			"speed": speed,
-			"rx": rx,
-			"tx": tx
-		}

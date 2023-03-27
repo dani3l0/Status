@@ -1,23 +1,31 @@
 import asyncio
 import re
 import os
+from os.path import exists
+from os.path import join as path
 
-from .utils import get, ls, basename, temp_val
+from .utils import get, ls, ls_glob, basename, parse_temperature
 
 
 cpu_thermals = [
-	"coretemp",		# Most desktop computers
 	"cputhermal",	# Raspberry Pis
-	"k10temp"		# My AMD-based terminal
+	"k10temp",		# My AMD-based terminal
+	"coretemp",		# Most desktop computers
+]
+
+non_division_sensors = [
+	"cputhermal",	# Raspberry Pis
 ]
 
 
 class CPU:
+
 	def __init__(self):
 		cpu_info = self.get_cpu_info()
 		self.cpu_model = cpu_info["model"]
 		self.cpu_cache = cpu_info["cache"]
 		self.cores = cpu_info["cores"]
+
 
 	async def get_full_info(self):
 		return {
@@ -30,6 +38,7 @@ class CPU:
 			"cores": self.cores
 		}
 
+
 	@staticmethod
 	async def get_utilisation():
 		fields = get_stat()
@@ -41,45 +50,58 @@ class CPU:
 		utilisation = 1.0 - idle_delta / total_delta
 		return utilisation
 
+
 	@staticmethod
 	def get_temperatures():
-		sensor = find_cpu_thermal()
-		temps = []
-		temps_meltdown = []
-		labels = []
-		for entry in ls(sensor):
-			f = basename(entry)
-			if f.startswith("temp"):
-				if f.endswith("_input"):
-					temps.append(temp_val(get(entry, isint=True)))
-				elif f.endswith("_crit"):
-					temps_meltdown.append(temp_val(get(entry, isint=True)))
-				elif f.endswith("_label"):
-					labels.append(get(entry).title())
-		nice = {x[0]: [x[1], x[2]] for x in zip(labels, temps, temps_meltdown) if "Package" not in x[0]}
-		return nice
+		thermal = find_cpu_thermal()
+		sensor = thermal["location"]
+		sensor_name = thermal["name"]
+		temps = {}
+	
+		for entry in ls_glob(sensor, "temp*_input"):
+			key = basename(entry).replace("_input", "")
+			zone = path(sensor, key)
+			if exists(f"{zone}_label"):
+				key = get(f"{zone}_label")
+				if key.startswith("Package id"): continue
+	
+			current = get(f"{zone}_input", isint=True)
+			meltdown = get(f"{zone}_crit", isint=True)
+			divide = sensor_name not in ["cputhermal"]
+			temps[key] = [parse_temperature(current, divide=divide), parse_temperature(meltdown, divide=divide)]
+
+		return temps
+
 
 	@staticmethod
 	def get_frequencies():
 		freqs = {}
+	
 		for entry in ls("/sys/devices/system/cpu/"):
 			f = basename(entry)
 			if f.startswith("cpu") and f[-1:].isnumeric():
 				freq = cpu_freq_helper(entry, "cur")
 				min_freq = cpu_freq_helper(entry, "min")
 				max_freq = cpu_freq_helper(entry, "max")
-				base_freq = get(os.path.join(entry, "cpufreq/base_frequency"), isint=True)
+				try:
+					base_freq = get(path(entry, "cpufreq/base_frequency"), isint=True)
+				except:
+					base_freq = None
+
 				freqs[f] = {
-					"now": round(freq / 1000),
-					"min": round(min_freq / 1000),
-					"base": round(base_freq / 1000),
-					"max": round(max_freq / 1000)
+					"now": freq,
+					"min": min_freq,
+					"base": base_freq,
+					"max": max_freq
 				}
+
 		return freqs
+
 
 	@staticmethod
 	def get_count():
 		return os.cpu_count()
+
 
 	@staticmethod
 	def get_cpu_info():
@@ -87,6 +109,7 @@ class CPU:
 		cache_size = None
 		cores = 1
 		cpu_info = get("/proc/cpuinfo")
+
 		for line in cpu_info.split("\n"):
 			if "model name" in line:
 				cpu_model = re.sub(".*model name.*:", "", line, 1).strip()
@@ -94,6 +117,7 @@ class CPU:
 				cache_size = re.sub(".*cache size.*:", "", line, 1).strip().split(" ")[0]
 			if "cpu cores" in line:
 				cores = re.sub(".*cpu cores.*:", "", line, 1).strip()
+
 		return {
 			"model": cpu_model,
 			"cache": int(cache_size),
@@ -101,28 +125,38 @@ class CPU:
 		}
 
 
+
 def get_stat():
 	with open('/proc/stat') as f:
 		fields = [float(column) for column in f.readline().strip().split()[1:]]
 		f.close()
+
 	return fields
 
 
 def find_cpu_thermal():
-	thermals = {}
 	location = "/sys/class/hwmon"
 
 	for sensor in ls(location):
-		name = get(os.path.join(sensor, "name"))
+		name = get(path(sensor, "name"))
 		if name not in cpu_thermals:
 			continue
-		return sensor
+
+		return {
+			"location": sensor,
+			"name": name
+		}
 
 
 def cpu_freq_helper(cpu_path: str, type: str):
-	freq = None
+	freq = get(path(cpu_path, f"cpufreq/scaling_{type}_freq"), isint=True)
+
+	if not freq:
+		freq = get(path(cpu_path, f"cpufreq/cpuinfo_{type}_freq"), isint=True)
+
 	try:
-		freq = get(os.path.join(cpu_path, f"cpufreq/scaling_{type}_freq"), isint=True)
-	except FileNotFoundError:
-		freq = get(os.path.join(cpu_path, f"cpufreq/cpuinfo_{type}_freq"), isint=True)
+		freq = round(freq / 1000)
+	except:
+		freq = None
+
 	return freq
