@@ -7,12 +7,15 @@ from os.path import join as path
 from .utils import get, ls, ls_glob, basename, parse_temperature
 
 
+# CPU thermal zone names for various devices
 cpu_thermals = [
+	"coretemp",		# Most desktop computers
 	"cputhermal",	# Raspberry Pis
 	"k10temp",		# My AMD-based terminal
-	"coretemp",		# Most desktop computers
 ]
 
+
+# Those sensors' values are not divided by 1000
 non_division_sensors = [
 	"cputhermal",	# Raspberry Pis
 ]
@@ -25,6 +28,7 @@ class CPU:
 		self.cpu_model = cpu_info["model"]
 		self.cpu_cache = cpu_info["cache"]
 		self.cores = cpu_info["cores"]
+		self.cpu_thermal = find_cpu_thermal()
 
 
 	async def get_full_info(self):
@@ -51,9 +55,8 @@ class CPU:
 		return utilisation
 
 
-	@staticmethod
-	def get_temperatures():
-		thermal = find_cpu_thermal()
+	def get_temperatures(self):
+		thermal = self.cpu_thermal
 		sensor = thermal["location"]
 		sensor_name = thermal["name"]
 		temps = {}
