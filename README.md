@@ -19,6 +19,8 @@ Status should now work as expected. Expect bugs as a large amount of changes was
 
 After thorough tests and bug fixes it will be released as stable.
 
+Frontend seems to be ready. However, code still can be organized in a more convenient way.
+
 
 ### Todo
 
