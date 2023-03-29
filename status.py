@@ -1,8 +1,11 @@
 import traceback
 from aiohttp import web
+
 from lib.machine import Machine
+from lib.config import Config
 
 
+config = Config()
 machine = Machine()
 
 
@@ -55,4 +58,4 @@ app.add_routes(routes)
 #
 # ssl_context.load_cert_chain(pubkey, privkey)
 
-web.run_app(app, host="0.0.0.0", port=9090)
+web.run_app(app, host=config.get("server", "address"), port=config.get("server", "port"))
