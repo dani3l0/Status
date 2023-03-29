@@ -10,14 +10,14 @@ from .utils import get, ls, ls_glob, basename, parse_temperature
 # CPU thermal zone names for various devices
 cpu_thermals = [
 	"coretemp",		# Most desktop computers
-	"cputhermal",	# Raspberry Pis
+	"cpu_thermal",	# Raspberry Pis
 	"k10temp",		# My AMD-based terminal
 ]
 
 
 # Those sensors' values are not divided by 1000
 non_division_sensors = [
-	"cputhermal",	# Raspberry Pis
+	"cpu_thermal",	# Raspberry Pis
 ]
 
 
