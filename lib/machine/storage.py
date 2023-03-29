@@ -9,7 +9,7 @@ class Storage:
 	def get_usage():
 		filesystems = {}
 		i = 0
-		mounts = get("/etc/mtab").split("\n")
+		mounts = get("/proc/mounts").split("\n")
 
 		for mount in mounts:
 			if mount.startswith("/dev/"):

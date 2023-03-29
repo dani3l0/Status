@@ -56,6 +56,7 @@ class CPU:
 
 
 	def get_temperatures(self):
+		if not self.cpu_thermal: return []
 		thermal = self.cpu_thermal
 		sensor = thermal["location"]
 		sensor_name = thermal["name"]
@@ -108,7 +109,7 @@ class CPU:
 
 	@staticmethod
 	def get_cpu_info():
-		cpu_model = "Unknown"
+		cpu_model = None
 		cache_size = None
 		cores = 1
 		cpu_info = get("/proc/cpuinfo")
@@ -117,14 +118,14 @@ class CPU:
 			if "model name" in line:
 				cpu_model = re.sub(".*model name.*:", "", line, 1).strip()
 			if "cache size" in line:
-				cache_size = re.sub(".*cache size.*:", "", line, 1).strip().split(" ")[0]
+				cache_size = int(re.sub(".*cache size.*:", "", line, 1).strip().split(" ")[0])
 			if "cpu cores" in line:
-				cores = re.sub(".*cpu cores.*:", "", line, 1).strip()
+				cores = int(re.sub(".*cpu cores.*:", "", line, 1).strip())
 
 		return {
 			"model": cpu_model,
-			"cache": int(cache_size),
-			"cores": int(cores)
+			"cache": cache_size,
+			"cores": cores
 		}
 
 
