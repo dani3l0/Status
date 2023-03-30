@@ -1,11 +1,13 @@
 import traceback
 from aiohttp import web
+import ssl
 
 from lib.machine import Machine
 from lib.config import Config
 
 
 config = Config()
+print(config.get("server", "ssl_cert"))
 machine = Machine()
 
 
@@ -42,20 +44,23 @@ async def redirector(request, handler):
 
 routes.static("/", "static")
 app = web.Application(middlewares=[redirector])
-# app.logger.manager.disable = 100 * True
+app.logger.manager.disable = 100 * config.get("misc", "debug")
 app.add_routes(routes)
 
-# ssl_context = None
-# ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-# ssl_dir = f"/etc/letsencrypt/live/{conf('server', 'domain')}"
-#
-# pubkey = conf("server", "tls_cert_path")
-# if not pubkey:
-#     pubkey = f"{ssl_dir}/fullchain.pem"
-# privkey = conf("server", "tls_key_path")
-# if not privkey:
-#     privkey = f"{ssl_dir}/privkey.pem"
-#
-# ssl_context.load_cert_chain(pubkey, privkey)
+if config.get("server", "domain"):
+	ssl_context = None
+	ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+	ssl_dir = f"/etc/letsencrypt/live/{config.get('server', 'domain')}"
+
+	pubkey = config.get("server", "tls_cert_path")
+	if not pubkey:
+		pubkey = f"{ssl_dir}/fullchain.pem"
+
+	privkey = config.get("server", "tls_key_path")
+	if not privkey:
+		privkey = f"{ssl_dir}/privkey.pem"
+
+	ssl_context.load_cert_chain(pubkey, privkey)
+
 
 web.run_app(app, host=config.get("server", "address"), port=config.get("server", "port"))
