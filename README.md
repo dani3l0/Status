@@ -1,8 +1,10 @@
-# Status v2
+# Status
 
-**Don't use it now. This is highly unstable and breakages will occur!**
+**but it's v2**
 
-This is a rewritten version of Status. Targets:
+**First version is under `old` branch**
+
+This is a new, rewritten version of Status. Expect bugs and missing features, as not everything might be implemented yet.
 
 🔨 Code is more flexible and organized
 
@@ -10,37 +12,55 @@ This is a rewritten version of Status. Targets:
 
 ℹ️ Providing more information in better, more readable way
 
-⚖️ More stability
+⚖️ Improved stability
+
+**[Check the demo!](https://status-ksk5.onrender.com/)** (but give it a while to load as Render suspends unused apps)
+
+Works on desktop computers, VMs, Raspberry Pis, and some virtual isolated environments like Render :>
 
 
-### What now works
+## Installation
 
-Status should now work as expected. Expect bugs as a large amount of changes was made to this project. Breakages will still occur.
+Nothing has changed here.
 
-After thorough tests and bug fixes it will be released as stable.
+```
+# Clone the repo
+git clone https://github.com/dani3l0/Status && cd Status
 
-Frontend seems to be ready. However, code still can be organized in a more convenient way.
+# Install dependenc(y)
+pip install -r requirements.txt
 
-I think it's ready to be released as `main` after some testing.
+# Run!
+python3 status.py
+```
 
-### Todo
+**Status should be available on [localhost:9090](http://localhost:9090)**
 
-Before the next stable release.
 
-- [x] Frontend concept, layout & style
+## Configuration
 
-- [x] Create dummy frontend
+This changed a lot. Configuration is now easier and more functional.
 
-- [x] Animations
+Status can now be configured via **configuration file**, **environment variables** and **command line arguments**.
 
-- [x] Optimizations
+**The importance of them is in the following order:**
 
-- [x] Link Frontend to Backend
+1. **Command line arguments** - the most important and will override everything.
 
-- [x] Flexible config
+2. **environment variables** - will override configuration file.
 
-- [x] Backend optimizations
+3. **configuration file** - the least important, overrides default configuration only.
 
-- [ ] Stability
+**Keys naming**
 
-- [x] Form a final API
+Config keys are named slightly differently under different ways of configuration. Understand it by example:
+
+| JSON config file key                       | Environment variable                      | Command line argiment
+|--------------------------------------------|-------------------------------------------|------------------------------------------------|
+| `server.port`                              | `STATUS_SERVER_PORT`                      | `--server-port`                                |
+| `server.address`                           | `STATUS_SERVER_ADDRESS`                   | `--server-address`                             |
+| `misc.debug`                               | `STATUS_MISC_DEBUG`                       | `--misc-debug`                                 |
+
+**Also, check `--help` for more information.**
+
+Soon I'm gonna write a better README
