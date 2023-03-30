@@ -1,27 +1,22 @@
-# Status
+<img src="status.png" width="800">
 
-**but it's v2**
+_I'm so poor at Blender :cry:_
 
-**First version is under `old` branch**
+## :thinking: What is it?
 
-This is a new, rewritten version of Status. Expect bugs and missing features, as not everything might be implemented yet.
+:information_source: **Status** is a simple, lightweight system monitoring app for small homeservers running Linux.
+It utilizes virtual filesystems (like `/sys`, `/proc` etc.) to retrieve information and give it to end user via nice web interface.
 
-🔨 Code is more flexible and organized
+:balance_scale: **Status** provides a good  balance between power and simplicity.
 
-🖥️ UI is refreshed, providing new cool features with even more pleasant look
+:runner: Runs flawlessly on most desktop computers, mini PCs and Raspberry Pis. However, virtual isolated environments may cause problems.
 
-ℹ️ Providing more information in better, more readable way
-
-⚖️ Improved stability
-
-**[Check the demo!](https://status-ksk5.onrender.com/)** (but give it a while to load as Render suspends unused apps)
-
-Works on desktop computers, VMs, Raspberry Pis, and some virtual isolated environments like Render :>
+:tv: **[Check the live demo!](https://status-ksk5.onrender.com/)** (but give it a while to load as Render suspends unused apps)
 
 
-## Installation
+## :rocket: Installation
 
-Nothing has changed here.
+This will take you just a few seconds.
 
 ```
 # Clone the repo
@@ -37,30 +32,28 @@ python3 status.py
 **Status should be available on [localhost:9090](http://localhost:9090)**
 
 
-## Configuration
+## :wrench: Configuration
 
-This changed a lot. Configuration is now easier and more functional.
+Status can be configured in multiple ways:
 
-Status can now be configured via **configuration file**, **environment variables** and **command line arguments**.
+1. **:desktop_computer: Command line arguments** - the most important and will override everything.
 
-**The importance of them is in the following order:**
+2. **:national_park: environment variables** - will override configuration file.
 
-1. **Command line arguments** - the most important and will override everything.
+3. **:memo: configuration file** - the least important, overrides default configuration only.
 
-2. **environment variables** - will override configuration file.
+It's good not to mix them. Use `--help` for more information.
 
-3. **configuration file** - the least important, overrides default configuration only.
+#### :pencil2: Config keys naming
 
-**Keys naming**
+Config keys are named slightly differently under different ways of configuration. Look at the table:
 
-Config keys are named slightly differently under different ways of configuration. Understand it by example:
+|                | in JSON config      | Environment variable        | Command line argument |
+|----------------|---------------------|-----------------------------|-----------------------|
+| **The rule**   | `{section}.{key}`   | `STATUS_{section}_{key}`    | `--{section}-{key}`   |
+| **Example #1** | `server.port`       | `STATUS_SERVER_PORT`        | `--server-port`       |
+| **Example #2** | `server.address`    | `STATUS_SERVER_ADDRESS`     | `--server-address`    |
+| **Example #3** | `misc.debug`        | `STATUS_MISC_DEBUG`         | `--misc-debug`        |
 
-| JSON config file key                       | Environment variable                      | Command line argiment
-|--------------------------------------------|-------------------------------------------|------------------------------------------------|
-| `server.port`                              | `STATUS_SERVER_PORT`                      | `--server-port`                                |
-| `server.address`                           | `STATUS_SERVER_ADDRESS`                   | `--server-address`                             |
-| `misc.debug`                               | `STATUS_MISC_DEBUG`                       | `--misc-debug`                                 |
+Command line offers `--config` (or `-c`) to set custom config location. Running Status with `--no-config` will ignore configuration file.
 
-**Also, check `--help` for more information.**
-
-Soon I'm gonna write a better README
