@@ -4,15 +4,19 @@ import ssl
 
 from lib.machine import Machine
 from lib.config import Config
+from lib.cache import Cache
 
 
 config = Config()
 machine = Machine()
+cache = Cache()
 
 
 async def get_status():
-	info = await machine.get_full_info()
-	return info
+	if cache.should_update():
+		info = await machine.get_full_info()
+		cache.update(info)
+	return cache.get()
 
 
 routes = web.RouteTableDef()
