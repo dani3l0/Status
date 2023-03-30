@@ -7,7 +7,6 @@ from lib.config import Config
 
 
 config = Config()
-print(config.get("server", "ssl_cert"))
 machine = Machine()
 
 
