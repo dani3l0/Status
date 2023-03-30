@@ -21,6 +21,7 @@ After thorough tests and bug fixes it will be released as stable.
 
 Frontend seems to be ready. However, code still can be organized in a more convenient way.
 
+I think it's ready to be released as `main` after some testing.
 
 ### Todo
 
@@ -36,10 +37,10 @@ Before the next stable release.
 
 - [x] Link Frontend to Backend
 
-- [ ] Flexible config
+- [x] Flexible config
 
-- [ ] Backend optimizations
+- [x] Backend optimizations
 
 - [ ] Stability
 
-- [ ] Form a final API
+- [x] Form a final API
