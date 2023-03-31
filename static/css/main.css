@@ -39,7 +39,7 @@ body {
 
 .screen .wrapper {
 	position: absolute;
-	width: 100%;
+	width: calc(100% - 24px);
 	top: 0;
 	left: 50%;
 	max-width: 640px;
@@ -47,7 +47,7 @@ body {
 }
 
 .header {
-	padding: 8px 4px;
+	padding: 12px 4px;
 	display: flex;
 	position: sticky;
 	top: 0;

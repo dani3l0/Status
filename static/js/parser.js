@@ -7,8 +7,8 @@ function updateCPU(cpu) {
 		temps.append(t[0])
 		temps_meltdown.append(t[1])
 	}
-	let temp = Math.round(temps.max() * 10) / 10
-	let meltdown = Math.round(temps_meltdown.min() * 10) / 10
+	let temp = temps.max()
+	let meltdown = temps_meltdown.min()
 
 	// Frequencies
 	let freq = [],
@@ -39,13 +39,13 @@ function updateCPU(cpu) {
 
 	mkBar("cpu-bar",
 		cpu.utilisation, Math.round(cpu.utilisation * 100), "%",
-		`Speed: ${freq}`,
+		(freq) ? `Speed: ${freq}` : "",
 		cpu.model
 	)
 
 	let _values_temp = []
-	_values_temp.addNode(`Current: ${temp} °C`, temp)
-	_values_temp.addNode(`Meltdown: ${meltdown} °C`, meltdown)
+	_values_temp.addNode(`Current: ${Math.round(temp* 10) / 10} °C`, temp)
+	_values_temp.addNode(`Meltdown: ${Math.round(meltdown* 10) / 10} °C`, meltdown)
 	mkItem("cpu-list", "thermostat", "Temperature", _values_temp)
 
 	mkItem("cpu-list", "numbers", "Core count", [
@@ -53,7 +53,7 @@ function updateCPU(cpu) {
 	])
 
 	let _values_freq = []
-	_values_freq.addNode(`${parseSize(freq_min * 1000, "Hz")} up to ${parseSize(freq_max * 1000, "Hz")}`)
+	_values_freq.addNode(`${parseSize(freq_min * 1000, "Hz")} up to ${parseSize(freq_max * 1000, "Hz")}`, (freq_min && freq_max))
 	_values_freq.addNode(`Base: ${parseSize(freq_base * 1000, "Hz")}`, freq_base)
 	mkItem("cpu-list", "speed", "Speed", _values_freq)
 
