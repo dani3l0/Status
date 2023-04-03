@@ -2,12 +2,11 @@ import traceback
 from aiohttp import web
 import ssl
 
+from lib.config import config
 from lib.machine import Machine
-from lib.config import Config
 from lib.cache import Cache
 
 
-config = Config()
 machine = Machine()
 cache = Cache()
 

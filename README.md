@@ -1,7 +1,5 @@
 <img src="status.png" width="800">
 
-_I'm so poor at Blender :cry:_
-
 ## :thinking: What is it?
 
 :information_source: **Status** is a simple, lightweight system monitoring app for small homeservers running Linux.
@@ -55,5 +53,6 @@ Config keys are named slightly differently under different ways of configuration
 | **Example #2** | `server.address`    | `STATUS_SERVER_ADDRESS`     | `--server-address`    |
 | **Example #3** | `misc.debug`        | `STATUS_MISC_DEBUG`         | `--misc-debug`        |
 
-Command line offers `--config` (or `-c`) to set custom config location. Running Status with `--no-config` will ignore configuration file.
+Command line offers `--config` (or `-c`) to set custom config location. Running Status with `--no-config` will neither read nor write any configuration file.
 
+For more detailed information, please visit project's [wiki](wiki).

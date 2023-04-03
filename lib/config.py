@@ -22,14 +22,36 @@ CONFIG_DEFAULT = {
 		},
 		"ssl_cert": {
 			"value": None,
-			"short": None,
 			"desc": "custom path to TLS certificate, used if domain is set"
 		},
 		"ssl_key": {
 			"value": None,
-			"short": None,
 			"desc": "custom path to TLS private key, used if domain is set"
 		},
+	},
+	"machine": {
+		"custom_storage": {
+			"value": False,
+			"short": "cs",
+			"no_value": True,
+			"desc": "Disable automatic detection of mounted storage devices, use custom mount points from config"
+		},
+		"storage": {
+			"value": {
+				"OS": "/",
+				"Files": "/home",
+				"Logs": "/var/log"
+			}
+		},
+		"enable_storage_blacklist": {
+			"value": False,
+			"short": "sb",
+			"no_value": True,
+			"desc": "Enable filesystem blacklist"
+		},
+		"storage_blacklist": {
+			"value": []
+		}
 	},
 	"misc": {
 		"debug": {
@@ -51,6 +73,12 @@ class Config:
 		for section in CONFIG_DEFAULT:
 			for key in CONFIG_DEFAULT[section]:
 				a = CONFIG_DEFAULT[section][key]
+				conf_map[f"{section}_{key}"] = f"{section}.{key}"
+				if "desc" not in a:
+					continue
+
+				if "short" not in a:
+					a["short"] = None
 				no_value = a["no_value"] if "no_value" in a else False
 				action = "count" if no_value else None
 				k = key.replace("_", "-")
@@ -60,10 +88,10 @@ class Config:
 				arg.help = a["desc"]
 				if not action: arg.metavar = key.upper()
 
-				conf_map[f"{section}_{key}"] = f"{section}.{key}"
-
 		parser.add_argument("-c", "--config", help="custom path to config file")
 		parser.add_argument("--no-config", action="count", help="ignore config files; don't read nor save them")
+
+		# Here the nightmare begins
 		self.config = vars(parser.parse_args())
 
 
@@ -107,7 +135,7 @@ class Config:
 			for key in CONFIG_DEFAULT[section]:
 				value = CONFIG_DEFAULT[section][key]["value"]
 				var_name = f"{section}_{key}"
-				if self.config[var_name] == None:
+				if var_name not in self.config or self.config[var_name] == None:
 					self.config[var_name] = value
 
 
@@ -121,3 +149,7 @@ class Config:
 			return self.config[var_name]
 		except KeyError:
 			return None
+
+
+global config
+config = Config()
