@@ -48,7 +48,7 @@ Config keys are named slightly differently under different ways of configuration
 
 |                | in JSON config      | Environment variable        | Command line argument |
 |----------------|---------------------|-----------------------------|-----------------------|
-| **The rule**   | `{section}.{key}`   | `STATUS_{section}_{key}`    | `--{section}-{key}`   |
+| **The rule**   | `{section}.{key}`   | `STATUS_{SECTION}_{KEY}`    | `--{section}-{key}`   |
 | **Example #1** | `server.port`       | `STATUS_SERVER_PORT`        | `--server-port`       |
 | **Example #2** | `server.address`    | `STATUS_SERVER_ADDRESS`     | `--server-address`    |
 | **Example #3** | `misc.debug`        | `STATUS_MISC_DEBUG`         | `--misc-debug`        |
