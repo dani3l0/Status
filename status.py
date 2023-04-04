@@ -49,8 +49,9 @@ app = web.Application(middlewares=[redirector])
 app.logger.manager.disable = 100 * config.get("misc", "debug")
 app.add_routes(routes)
 
+ssl_context = None
+
 if config.get("server", "domain"):
-	ssl_context = None
 	ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
 	ssl_dir = f"/etc/letsencrypt/live/{config.get('server', 'domain')}"
 
@@ -65,4 +66,4 @@ if config.get("server", "domain"):
 	ssl_context.load_cert_chain(pubkey, privkey)
 
 
-web.run_app(app, host=config.get("server", "address"), port=config.get("server", "port"))
+web.run_app(app, host=config.get("server", "address"), port=config.get("server", "port"), ssl_context=ssl_context)
