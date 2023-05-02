@@ -1,0 +1,10 @@
+version: "2.0-beta"
+services:
+  app:
+    build: .
+    ports:
+      - "9090:9090"
+    volumes:
+      - "/dev:/dev"
+      - "/proc:/proc"
+      - "/sys:/sys"

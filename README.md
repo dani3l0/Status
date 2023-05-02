@@ -14,7 +14,11 @@ It utilizes virtual filesystems (like `/sys`, `/proc` etc.) to retrieve informat
 
 ## :rocket: Installation
 
-This will take you just a few seconds.
+This will take you just a few seconds. It's up to you which one you choose :)
+
+### :gear: Bare-metal (recommended)
+
+Status has access to all virtual filesystems in your OS, which means more information and most reliable values.
 
 ```
 # Clone the repo
@@ -25,6 +29,18 @@ pip install -r requirements.txt
 
 # Run!
 python3 status.py
+```
+
+### :whale: Docker (beta)
+
+Status may have trouble getting some information, as it works in an isolated environment. Some values might act weird or become unavailable.
+
+```
+# Clone the repo
+git clone https://github.com/dani3l0/Status && cd Status
+
+# Build & run app
+docker-compose up -d
 ```
 
 **Status should be available on [localhost:9090](http://localhost:9090)**
