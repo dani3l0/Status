@@ -1,10 +1,12 @@
-version: "2.0-beta"
+version: "2"
 services:
   app:
     build: .
     ports:
       - "9090:9090"
     volumes:
-      - "/dev:/dev"
-      - "/proc:/proc"
-      - "/sys:/sys"
+      - "/dev:/mnt/host/dev"
+      - "/etc:/mnt/host/etc"
+      - "/etc/os-release:/mnt/host/etc/os-release"
+      - "/proc:/mnt/host/proc"
+      - "/sys:/mnt/host/sys"
