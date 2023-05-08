@@ -12,6 +12,11 @@ body {
 	overflow: hidden;
 	-webkit-tap-highlight-color: transparent;
 }
+.unloaded {
+	opacity: 0;
+	transform: scale(0.9);
+	visibility: hidden;
+}
 
 
 /* Dynamic paging */

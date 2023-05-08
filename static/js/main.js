@@ -25,7 +25,10 @@ function goto(target) {
 function update() {
 	let xhr = new XMLHttpRequest()
 	xhr.open("GET", "api/status")
-	xhr.onload = function() {parseData(this)}
+	xhr.onload = function() {
+		get("main").classList.remove("unloaded")
+		parseData(this)
+	}
 	xhr.send()
 }
 
