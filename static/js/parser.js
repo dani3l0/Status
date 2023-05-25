@@ -57,7 +57,7 @@ function updateCPU(cpu) {
 	_values_freq.addNode(`Base: ${parseSize(freq_base * 1000, "Hz")}`, freq_base)
 	mkItem("cpu-list", "speed", "Speed", _values_freq)
 
-	mkItem("cpu-list", "cached", "Cache size", parseSize(cpu.cache, "B"))
+	mkItem("cpu-list", "cached", "Cache size", parseSize(cpu.cache / 1024 * 1000, "B"))
 }
 
 
