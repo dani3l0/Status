@@ -31,9 +31,9 @@ pip install -r requirements.txt
 python3 status.py
 ```
 
-### :whale: Docker (beta)
+### :whale: Docker (broken)
 
-Status may have trouble getting some information, as it works in an isolated environment. Some values might act weird or become unavailable.
+Status will act weirdly here. Docker seems not to support symlinks which app heavily relies on.
 
 ```
 # Clone the repo
