@@ -121,7 +121,9 @@ function mkItem(target, icon, name, values, div_id) {
 		let _name = mkDiv({className: "name", text: name})
 		_text.appendChild(_name)
 		for (let _ of values) {
-			_text.appendChild(mkDiv({className: "value"}))
+			let val = mkDiv({className: "value"})
+			divs.append(val)
+			_text.appendChild(val)
 		}
 		_item.appendChild(_icon)
 		_item.appendChild(_text)
