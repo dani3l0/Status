@@ -1,6 +1,7 @@
 import traceback
 from aiohttp import web
 import ssl
+import os
 
 from lib.config import config
 from lib.machine import Machine
@@ -9,6 +10,8 @@ from lib.cache import Cache
 
 machine = Machine()
 cache = Cache()
+
+working_dir = os.path.dirname(os.path.realpath(__file__))
 
 
 async def get_status():
@@ -31,7 +34,8 @@ async def api(request):
 	try:
 		return web.json_response(await get_status())
 	except:
-		return web.Response(text=traceback.format_exc(), status=500)
+		report = traceback.format_exc().replace(f"{working_dir}/", "")
+		return web.Response(text=report, status=500)
 
 
 @web.middleware

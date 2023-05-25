@@ -34,12 +34,17 @@ function update() {
 
 let data_prev
 function parseData(resp) {
-	let data = JSON.parse(resp.responseText)
-	if (!data_prev) data_prev = data
-	updateCPU(data.cpu)
-	updateMem(data.memory)
-	updateStorage(data.storage)
-	updateNet(data_prev.network, data.network)
-	updateHost(data.host)
-	data_prev = data
+	try {
+		let data = JSON.parse(resp.responseText)
+		if (!data_prev) data_prev = data
+		updateCPU(data.cpu)
+		updateMem(data.memory)
+		updateStorage(data.storage)
+		updateNet(data_prev.network, data.network)
+		updateHost(data.host)
+		data_prev = data
+	}
+	catch (e) {
+		console.error(resp.responseText)
+	}
 }
