@@ -1,5 +1,6 @@
 @import url(../fonts/MaterialSymbols/MaterialSymbols.css);
 @import url(../fonts/Quicksand/Quicksand.css);
+@import url(../fonts/nabla/nabla.css);
 
 body {
 	background: #000;
@@ -89,6 +90,19 @@ body {
 }
 .darken {
 	color: #888;
+}
+.title-main {
+	text-align: center;
+	font-size: 72px;
+	margin: 112px 0 88px;
+}
+.title-main div {
+	display: inline-block;
+	background-image: url(../img/titlebg.jpeg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 
