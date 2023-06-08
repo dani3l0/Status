@@ -63,7 +63,7 @@ body {
 	box-shadow: 10px 0 10px #000;
 	align-items: center;
 }
-.header .icon.back {
+.header i.back {
 	padding: 10px;
 	color: #BBB;
 	cursor: pointer;
@@ -71,7 +71,7 @@ body {
 	margin-right: 10px;
 	transition: all .2s;
 }
-.header .icon.back:hover {
+.header i.back:hover {
 	background: #282828;
 	color: #DDD;
 }
@@ -127,7 +127,7 @@ body {
 .list .item.clickable:hover {
 	background: #282828;
 }
-.list .item .icon {
+.list .item i {
 	margin-right: 16px;
 	font-size: 24px;
 	color: #222;
@@ -152,7 +152,7 @@ body {
 	width: 50%;
 	text-align: center;
 }
-.sided .icon {
+.sided i {
 	font-size: 32px;
 	color: #222;
 	background: #F77;

@@ -5,7 +5,7 @@
 	src: url(MaterialSymbols.woff2) format('woff2');
 }
 
-.icon {
+i {
 	font-family: 'Material Symbols Rounded';
 	font-weight: normal;
 	font-style: normal;
@@ -22,6 +22,6 @@
 
 }
 
-.icon.back:after {
+i.back:after {
 	content: "arrow_back";
 }

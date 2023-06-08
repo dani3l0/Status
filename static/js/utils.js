@@ -95,8 +95,8 @@ function strToArray(str) {
 	return str
 }
 
-function mkDiv(args) {
-	let div = document.createElement("div")
+function mkDiv(args, icon) {
+	let div = document.createElement((icon) ? "i" : "div")
 	if (args.id) div.id = args.id
 	if (args.className) div.className = args.className
 	if (args.text) {
@@ -116,7 +116,7 @@ function mkItem(target, icon, name, values, div_id) {
 	if (!item || divs.length != values.length) {
 		let _target = get(target)
 		let _item = mkDiv({className: "item", id})
-		let _icon = mkDiv({className: "icon", text: icon})
+		let _icon = mkDiv({text: icon}, true)
 		let _text = mkDiv({className: "text"})
 		let _name = mkDiv({className: "name", text: name})
 		_text.appendChild(_name)
