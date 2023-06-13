@@ -16,9 +16,9 @@ It utilizes virtual filesystems (like `/sys`, `/proc` etc.) to retrieve informat
 
 This will take you just a few seconds. It's up to you which one you choose :)
 
-### :gear: Bare-metal (recommended)
+### :gear: Bare-metal
 
-Status has access to all virtual filesystems in your OS, which means more information and most reliable values.
+Status has access to all virtual filesystems in your OS, which means more information and most reliable values. :whale: Docker support is broken for now.
 
 ```
 # Clone the repo
@@ -31,19 +31,7 @@ pip install -r requirements.txt
 python3 status.py
 ```
 
-### :whale: Docker (broken)
-
-Status will act weirdly here. Docker seems not to support symlinks which app heavily relies on.
-
-```
-# Clone the repo
-git clone https://github.com/dani3l0/Status && cd Status
-
-# Build & run app
-docker-compose up -d
-```
-
-**Status should be available on [localhost:9090](http://localhost:9090)**
+**Status should be available on [localhost:9090](http://localhost:9090)**.
 
 
 ## :wrench: Configuration
