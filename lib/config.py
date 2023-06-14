@@ -28,6 +28,10 @@ CONFIG_DEFAULT = {
 			"value": None,
 			"desc": "custom path to TLS private key, used if domain is set"
 		},
+		"enable_cors": {
+			"value": False,
+			"desc": "enable access to API via third-party origins (domain, scheme or port)"
+		},
 	},
 	"machine": {
 		"custom_storage": {

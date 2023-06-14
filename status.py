@@ -42,6 +42,8 @@ async def api(request):
 async def redirector(request, handler):
 	try:
 		resp = await handler(request)
+		if config.get("server", "enable_cors"):
+			resp.headers["Access-Control-Allow-Origin"] = "*"
 		return resp
 
 	except (web.HTTPInternalServerError, web.HTTPForbidden, web.HTTPNotFound):
