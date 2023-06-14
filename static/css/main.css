@@ -108,25 +108,22 @@ body {
 /* UI Components */
 .list {
 	padding: 6px;
-	background: #181818;
 	border-radius: 24px;
 	margin: 8px;
 }
 .list .item {
 	display: flex;
 	align-items: center;
-	margin-bottom: 6px;
+	margin-bottom: 8px;
 	border-radius: 20px;
-	padding: 12px;
+	padding: 16px;
+	background: #111;
 	transition: all .2s;
 }
-.list .item:last-child {
-	margin: 0;
+.list .clickable:hover {
+	background: #222;
 }
-.list .item.clickable:hover {
-	background: #282828;
-}
-.list .item i {
+.list i {
 	margin-right: 16px;
 	font-size: 24px;
 	color: #222;
@@ -134,12 +131,28 @@ body {
 	padding: 10px;
 	border-radius: 12px;
 }
-.list .item .name {
+.list .name {
 	font-size: 16px;
 	margin-bottom: 1px;
 }
-.list .item .value {
+.list .value {
 	color: #999;
+}
+.list .arrow {
+	background: #222;
+	color: #CCC;
+	font-size: 18px;
+	margin: 0;
+	margin-left: auto;
+	border-radius: 100px;
+	transition: all .2s;
+}
+.list .item:hover .arrow {
+	background: #333;
+	color: #DDD;
+}
+.list .arrow::after {
+	content: "chevron_right";
 }
 
 .sided {
