@@ -17,6 +17,7 @@ class Storage:
 
 		else:
 			mounts = get("/proc/mounts").split("\n")
+			listed_devices = []
 			for mount in mounts:
 				if mount.startswith("/dev/"):
 					line = mount.split(" ")
@@ -24,7 +25,9 @@ class Storage:
 					if config.get("machine", "enable_storage_blacklist"):
 						if line[1] in config.get("machine", "storage_blacklist"):
 							stuff = None
-					if stuff: filesystems[stuff[0]] = [line[1], stuff[1]]
+					if stuff and line[0] not in listed_devices:
+						filesystems[stuff[0]] = [line[1], stuff[1]]
+					listed_devices.append(line[0])
 
 		for fs in filesystems:
 			usage = shutil.disk_usage(filesystems[fs][0])
