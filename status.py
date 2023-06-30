@@ -26,7 +26,7 @@ routes = web.RouteTableDef()
 
 @routes.get("/")
 async def index(request):
-	return web.FileResponse("static/index.html")
+	return web.FileResponse("html/index.html")
 
 
 @routes.get("/api/status")
@@ -50,7 +50,7 @@ async def redirector(request, handler):
 		raise web.HTTPFound(location="/")
 
 
-routes.static("/", "static")
+routes.static("/", "html")
 app = web.Application(middlewares=[redirector])
 app.logger.manager.disable = 100 * config.get("misc", "debug")
 app.add_routes(routes)
