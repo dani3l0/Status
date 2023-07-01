@@ -2,8 +2,8 @@
 @import url(../fonts/Quicksand/Quicksand.css);
 
 body {
-	background: hsl(var(--color), 100%, 3%);
-	color: hsl(var(--color), 100%, 90%);
+	background: hsl(var(--color), 90%, 2%);
+	color: hsl(var(--color), 90%, 92%);
 	margin: 0;
 	user-select: none;
 	font-size: 14px;
@@ -57,9 +57,9 @@ body {
 	position: sticky;
 	top: 0;
 	z-index: 1000;
-	background: hsla(var(--color), 100%, 3%, 88%);
+	background: hsla(var(--color), 90%, 2%, 88%);
 	backdrop-filter: blur(8px);
-	box-shadow: 10px 0 10px hsl(var(--color), 100%, 3%);
+	box-shadow: 10px 0 10px hsl(var(--color), 90%, 2%);
 	align-items: center;
 }
 .header i.back {
@@ -99,12 +99,12 @@ p {
 }
 .title-main div {
 	display: inline-block;
-	color: hsl(var(--color), 100%, 80%);
+	color: hsl(var(--color), 90%, 82%);
 }
 button {
 	display: flex;
 	align-items: center;
-	background: hsl(var(--color), 50%, 10%);
+	background: hsl(var(--color), 20%, 10%);
 	color: inherit;
 	border: none;
 	outline: none;
@@ -121,7 +121,7 @@ button i {
 	font-size: 20px;
 }
 button:hover {
-	background: hsl(var(--color), 50%, 15%);
+	background: hsl(var(--color), 20%, 15%);
 }
 
 
@@ -137,17 +137,17 @@ button:hover {
 	margin-bottom: 8px;
 	border-radius: 20px;
 	padding: 16px;
-	background: hsl(var(--color), 50%, 9%);
+	background: hsl(var(--color), 20%, 9%);
 	transition: all .2s;
 }
 .list .clickable:hover {
-	background: hsl(var(--color), 50%, 12%);
+	background: hsl(var(--color), 20%, 12%);
 }
 .list i {
 	margin-right: 16px;
 	font-size: 24px;
 	color: #222;
-	background: hsl(var(--color), 100%, 80%);
+	background: hsla(var(--color), 900%, 82%);
 	padding: 10px;
 	border-radius: 12px;
 }
@@ -159,8 +159,8 @@ button:hover {
 	opacity: .58;
 }
 .list .arrow {
-	background: hsl(var(--color), 40%, 14%);
-	color: hsl(var(--color), 100%, 90%);
+	background: hsl(var(--color), 20%, 14%);
+	color: hsl(var(--color), 90%, 90%);
 	font-size: 18px;
 	margin: 0;
 	margin-left: auto;
@@ -168,8 +168,7 @@ button:hover {
 	transition: all .2s;
 }
 .list .item:hover .arrow {
-	background: hsl(var(--color), 40%, 18%);
-	color: #DDD;
+	background: hsl(var(--color), 20%, 18%);
 }
 .list .arrow::after {
 	content: "chevron_right";
@@ -187,7 +186,7 @@ button:hover {
 .sided i {
 	font-size: 32px;
 	color: #222;
-	background: hsl(var(--color), 100%, 75%);
+	background: hsl(var(--color), 100%, 77%);
 	margin-bottom: 10px;
 	padding: 12px;
 	border-radius: 12px;
@@ -220,7 +219,7 @@ button:hover {
 	margin-left: auto;
 }
 .bar .progress {
-	background: hsl(var(--color), 50%, 11%);
+	background: hsl(var(--color), 30%, 11%);
 	height: 16px;
 	margin: 6px 0 8px;
 	border-radius: 16px;
@@ -232,7 +231,7 @@ button:hover {
 	position: absolute;
 	width: var(--value);
 	height: 100%;
-	background: hsl(var(--color), 100%, 89%);
+	background: hsl(var(--color), 90%, 85%);
 	transition: all .7s;
 }
 .bar .desc {
