@@ -1,0 +1,15 @@
+.red {
+    --color: 0;
+}
+.orange {
+    --color: 35;
+}
+.green {
+    --color: 110;
+}
+.blue {
+    --color: 200;
+}
+.purple {
+    --color: 270;
+}

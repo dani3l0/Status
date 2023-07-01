@@ -2,6 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
 	loadBackButtons()
 	update()
 	setInterval(update, 1500)
+	loadThemePicker()
+	try {
+		let accent = localStorage.getItem("statusapp-accent")
+		if (accent) selectAccent(accent)
+	}
+	catch (e) {}
 })
 
 function loadBackButtons() {
@@ -19,6 +25,25 @@ function goto(target) {
 	for (screen of screens) {
 		if (toShow == screen) screen.classList.remove("hidden")
 		else screen.classList.add("hidden")
+	}
+}
+
+function loadThemePicker() {
+	let accents = getClasses("accents")[0].children
+	for (let accent of accents) {
+		accent.addEventListener("click", () => {
+			selectAccent(accent.className)
+		})
+	}
+}
+
+function selectAccent(accent) {
+	document.body.className = accent
+	try {
+		localStorage.setItem("statusapp-accent", accent)
+	}
+	catch (e) {
+		console.warn("Cookies are disabled. Settings will not be saved.")
 	}
 }
 

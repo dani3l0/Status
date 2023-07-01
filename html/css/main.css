@@ -2,8 +2,8 @@
 @import url(../fonts/Quicksand/Quicksand.css);
 
 body {
-	background: #000;
-	color: #EEE;
+	background: hsl(var(--color), 100%, 3%);
+	color: hsl(var(--color), 100%, 90%);
 	margin: 0;
 	user-select: none;
 	font-size: 14px;
@@ -57,22 +57,20 @@ body {
 	position: sticky;
 	top: 0;
 	z-index: 1000;
-	background: #000D;
+	background: hsla(var(--color), 100%, 3%, 88%);
 	backdrop-filter: blur(8px);
-	box-shadow: 10px 0 10px #000;
+	box-shadow: 10px 0 10px hsl(var(--color), 100%, 3%);
 	align-items: center;
 }
 .header i.back {
 	padding: 10px;
-	color: #BBB;
 	cursor: pointer;
 	border-radius: 12px;
 	margin-right: 10px;
 	transition: all .2s;
 }
 .header i.back:hover {
-	background: #282828;
-	color: #DDD;
+	background: #FFFFFF18;
 }
 .header .title {
 	font-size: 22px;
@@ -84,24 +82,46 @@ body {
 
 
 /* Universal UI Stuff */
+p {
+	margin: 0;
+	display: block;
+}
 .clickable {
 	cursor: pointer;
 }
 .darken {
-	color: #888;
+	opacity: .5;
 }
 .title-main {
 	text-align: center;
 	font-size: 72px;
-	margin: 112px 0 88px;
+	margin: 112px 0 12px;
 }
 .title-main div {
 	display: inline-block;
-	background-image: url(../img/titlebg.jpeg);
-	background-repeat: no-repeat;
-	background-size: cover;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	color: hsl(var(--color), 100%, 80%);
+}
+button {
+	display: flex;
+	align-items: center;
+	background: hsl(var(--color), 50%, 10%);
+	color: inherit;
+	border: none;
+	outline: none;
+	font-family: inherit;
+	font-size: inherit;
+	border-radius: 24px;
+	padding: 14px 16px;
+	font-weight: bold;
+	cursor: pointer;
+	transition: all .2s;
+}
+button i {
+	margin-right: 8px;
+	font-size: 20px;
+}
+button:hover {
+	background: hsl(var(--color), 50%, 15%);
 }
 
 
@@ -117,17 +137,17 @@ body {
 	margin-bottom: 8px;
 	border-radius: 20px;
 	padding: 16px;
-	background: #111;
+	background: hsl(var(--color), 50%, 9%);
 	transition: all .2s;
 }
 .list .clickable:hover {
-	background: #222;
+	background: hsl(var(--color), 50%, 12%);
 }
 .list i {
 	margin-right: 16px;
 	font-size: 24px;
 	color: #222;
-	background: #B8F;
+	background: hsl(var(--color), 100%, 80%);
 	padding: 10px;
 	border-radius: 12px;
 }
@@ -136,11 +156,11 @@ body {
 	margin-bottom: 1px;
 }
 .list .value {
-	color: #999;
+	opacity: .58;
 }
 .list .arrow {
-	background: #222;
-	color: #CCC;
+	background: hsl(var(--color), 40%, 14%);
+	color: hsl(var(--color), 100%, 90%);
 	font-size: 18px;
 	margin: 0;
 	margin-left: auto;
@@ -148,7 +168,7 @@ body {
 	transition: all .2s;
 }
 .list .item:hover .arrow {
-	background: #333;
+	background: hsl(var(--color), 40%, 18%);
 	color: #DDD;
 }
 .list .arrow::after {
@@ -167,7 +187,7 @@ body {
 .sided i {
 	font-size: 32px;
 	color: #222;
-	background: #F77;
+	background: hsl(var(--color), 100%, 75%);
 	margin-bottom: 10px;
 	padding: 12px;
 	border-radius: 12px;
@@ -184,7 +204,6 @@ body {
 	margin: 32px 0 12px;
 }
 .bar .text {
-	color: #D8D8D8;
 	display: flex;
 	align-items: flex-end;
 }
@@ -197,11 +216,11 @@ body {
 	margin-left: 4px;
 }
 .bar .right {
-	color: #888;
+	opacity: .5;
 	margin-left: auto;
 }
 .bar .progress {
-	background: #222;
+	background: hsl(var(--color), 50%, 11%);
 	height: 16px;
 	margin: 6px 0 8px;
 	border-radius: 16px;
@@ -213,9 +232,69 @@ body {
 	position: absolute;
 	width: var(--value);
 	height: 100%;
-	background: #D6D6D6;
+	background: hsl(var(--color), 100%, 89%);
 	transition: all .7s;
 }
 .bar .desc {
-	color: #888;
+	opacity: .5;
+}
+.center {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+.titlebar {
+	margin-bottom: 64px;
+}
+.themes {
+	margin: 12px 4px;
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+.themes .theme {
+	width: 50%;
+	cursor: pointer;
+	margin: 8px;
+	padding: 4px 14px;
+	background: #111;
+	border-radius: 30px;
+}
+.theme .preview .box {
+	background: #222;
+	border-radius: 16px;
+	margin: 12px 0;
+	padding: 12px;
+	display: flex;
+	align-items: center;
+}
+.theme .preview .box i {
+	margin-left: auto;
+	color: #BBB;
+	font-size: 18px;
+	border-radius: 48px;
+	background: #333;
+	padding: 8px 7px 7px 8px;
+}
+.themes .theme.selected {
+	border: 4px solid #68F;
+}
+
+.accents {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	max-width: 360px;
+	padding: 12px;
+}
+.accents div {
+	height: 32px;
+	width: 32px;
+	border-radius: 48px;
+	margin: 8px;
+	background: hsl(var(--color), var(--saturation, 100%), 50%);
+}
+.accents .selected {
+	border: 4px solid #68F;
 }

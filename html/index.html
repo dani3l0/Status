@@ -6,16 +6,23 @@
 	<meta name="theme-color" content="#000">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link href="img/icon.png" rel="icon">
+	<link rel="stylesheet" type="text/css" href="css/colors.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script type="text/javascript" src="js/utils.js"></script>
 	<script type="text/javascript" src="js/parser.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
-<body>
+<body class="red">
 	<!-- Main screen -->
 	<div class="screen unloaded" id="main">
 		<div class="wrapper">
 			<div class="title-main"><div>Status</div></div>
+			<div class="center titlebar">
+				<button onclick="goto('theme')">
+					<i>palette</i>
+					<p>Theme</p>
+				</button>
+			</div>
 			<div class="contents">
 				<div class="list">
 					<div class="item clickable" onclick="goto('cpu')">
@@ -139,6 +146,53 @@
 			</div>
 			<div class="contents">
 				<div class="list" id="host-list"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Theme window -->
+	<div class="screen hidden" id="theme">
+		<div class="wrapper">
+			<div class="header">
+				<i class="back"></i>
+				<div class="title">Theme [Beta]</div>
+			</div>
+			<div class="contents">
+				<div class="center" style="display: none;">
+					<div class="themes">
+						<div class="theme light selected">
+							<div class="preview">
+								<div class="box">
+									<i>chevron_right</i>
+								</div>
+								<div class="box">
+									<i>chevron_right</i>
+								</div>
+							</div>
+						</div>
+						<div class="theme dark">
+							<div class="preview">
+								<div class="box">
+									<i>chevron_right</i>
+								</div>
+								<div class="box">
+									<i>chevron_right</i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="center">
+					<div class="accents">
+						<div class="red"></div>
+						<div class="orange"></div>
+						<div class="green"></div>
+						<div class="blue"></div>
+						<div class="purple"></div>
+					</div>
+				</div>
+				<div></div>
+				<div class="center" style="opacity: .6;margin: 12px 0;">More theming options will appear in future updates.</div>
 			</div>
 		</div>
 	</div>
