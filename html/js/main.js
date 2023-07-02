@@ -33,6 +33,7 @@ function loadThemePicker() {
 	for (let accent of accents) {
 		accent.addEventListener("click", () => {
 			selectAccent(accent.className)
+			goto('main')
 		})
 	}
 }

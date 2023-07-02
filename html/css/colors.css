@@ -2,14 +2,23 @@
     --color: 0;
 }
 .orange {
-    --color: 35;
+    --color: 30;
+}
+.yellow {
+    --color: 55;
 }
 .green {
-    --color: 110;
+    --color: 100;
+}
+.lightblue {
+    --color: 210;
 }
 .blue {
-    --color: 200;
+    --color: 240;
 }
 .purple {
     --color: 270;
+}
+.pink {
+    --color: 320;
 }

@@ -11,6 +11,7 @@ body {
 	font-weight: bold;
 	overflow: hidden;
 	-webkit-tap-highlight-color: transparent;
+	transition: all 2s;
 }
 .unloaded {
 	opacity: 0;
@@ -231,7 +232,7 @@ button:hover {
 	position: absolute;
 	width: var(--value);
 	height: 100%;
-	background: hsl(var(--color), 90%, 85%);
+	background: hsl(var(--color), 90%, 90%);
 	transition: all .7s;
 }
 .bar .desc {
@@ -284,7 +285,7 @@ button:hover {
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	max-width: 360px;
+	max-width: 480px;
 	padding: 12px;
 }
 .accents div {
