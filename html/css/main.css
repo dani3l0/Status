@@ -3,7 +3,7 @@
 
 body {
 	background: hsl(var(--color), 90%, 2%);
-	color: hsl(var(--color), 90%, 92%);
+	color: hsl(var(--color), 95%, 90%);
 	margin: 0;
 	user-select: none;
 	font-size: 14px;
@@ -11,7 +11,7 @@ body {
 	font-weight: bold;
 	overflow: hidden;
 	-webkit-tap-highlight-color: transparent;
-	transition: all 2s;
+	transition: all .5s;
 }
 .unloaded {
 	opacity: 0;
