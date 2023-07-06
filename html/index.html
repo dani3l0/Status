@@ -8,11 +8,12 @@
 	<link href="img/icon.png" rel="icon">
 	<link rel="stylesheet" type="text/css" href="css/colors.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/light.css">
 	<script type="text/javascript" src="js/utils.js"></script>
 	<script type="text/javascript" src="js/parser.js"></script>
 	<script type="text/javascript" src="js/main.js"></script>
 </head>
-<body class="red">
+<body>
 	<!-- Main screen -->
 	<div class="screen unloaded" id="main">
 		<div class="wrapper">
@@ -155,12 +156,12 @@
 		<div class="wrapper">
 			<div class="header">
 				<i class="back"></i>
-				<div class="title">Theme [Beta]</div>
+				<div class="title">Theme</div>
 			</div>
 			<div class="contents">
-				<div class="center" style="display: none;">
+				<div class="center">
 					<div class="themes">
-						<div class="theme light selected">
+						<div class="theme light selected" onclick="selectTheme(true)">
 							<div class="preview">
 								<div class="box">
 									<i>chevron_right</i>
@@ -170,7 +171,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="theme dark">
+						<div class="theme dark" onclick="selectTheme(false)">
 							<div class="preview">
 								<div class="box">
 									<i>chevron_right</i>
@@ -184,18 +185,16 @@
 				</div>
 				<div class="center">
 					<div class="accents">
-						<div class="red"></div>
-						<div class="orange"></div>
-						<div class="yellow"></div>
-						<div class="green"></div>
-						<div class="lightblue"></div>
-						<div class="blue"></div>
-						<div class="purple"></div>
-						<div class="pink"></div>
+						<i class="red"></i>
+						<i class="orange"></i>
+						<i class="yellow"></i>
+						<i class="green"></i>
+						<i class="lightblue"></i>
+						<i class="blue"></i>
+						<i class="purple"></i>
+						<i class="pink"></i>
 					</div>
 				</div>
-				<div></div>
-				<div class="center" style="opacity: .6;margin: 12px 0;">More theming options will appear in future updates.</div>
 			</div>
 		</div>
 	</div>

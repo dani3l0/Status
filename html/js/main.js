@@ -5,7 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
 	loadThemePicker()
 	try {
 		let accent = localStorage.getItem("statusapp-accent")
-		if (accent) selectAccent(accent)
+		if (accent) selectAccent(accent, false)
+		else selectAccent("red", false)
+		let theme = localStorage.getItem("statusapp-light")
+		if (theme) selectTheme(theme == "true", false)
+		else selectTheme(false, false)
 	}
 	catch (e) {}
 })
@@ -33,15 +37,42 @@ function loadThemePicker() {
 	for (let accent of accents) {
 		accent.addEventListener("click", () => {
 			selectAccent(accent.className)
-			goto('main')
 		})
 	}
 }
 
-function selectAccent(accent) {
-	document.body.className = accent
+function selectAccent(accent, save=true) {
+	accent = accent.replace("selected", "").trim()
+	let available = getClasses("accents")[0].children
+	let cl = document.body.classList
+	for (let color of available) {
+		if (color.classList.contains(accent)) {
+			color.classList.add("selected")
+			cl.add(accent)
+		}
+		else {
+			color.classList.remove("selected")
+			cl.remove(color.className.replace("selected", ""))
+		}
+	}
+	if (!save) return
 	try {
 		localStorage.setItem("statusapp-accent", accent)
+	}
+	catch (e) {
+		console.warn("Cookies are disabled. Settings will not be saved.")
+	}
+}
+function selectTheme(isLight, save=true) {
+	let cl = document.body.classList
+	let elems = getClasses("theme")
+	if (isLight) cl.add("light")
+	else cl.remove("light")
+	elems[0 + isLight].classList.remove("selected")
+	elems[1 - isLight].classList.add("selected")
+	if (!save) return
+	try {
+		localStorage.setItem("statusapp-light", isLight)
 	}
 	catch (e) {
 		console.warn("Cookies are disabled. Settings will not be saved.")

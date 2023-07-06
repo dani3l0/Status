@@ -1,0 +1,48 @@
+body.light {
+	background: hsl(var(--color), 20%, 90%);
+	color: hsl(var(--color), 20%, 20%);
+}
+.light .header {
+	background: hsla(var(--color), 20%, 90%, 88%);
+	box-shadow: 0 10px 10px hsl(var(--color), 20%, 90%);
+}
+.light .header i.back:hover {
+	background: #00000018;
+}
+.light .title-main div {
+	color: hsl(var(--color), 100%, 30%);
+}
+.light button {
+	background: hsl(var(--color), 25%, 82%);
+}
+.light button:hover {
+	background: hsl(var(--color), 25%, 77%);
+}
+.light .list .item {
+	background: hsl(var(--color), 25%, 82%);
+}
+.light .list .clickable:hover {
+	background: hsl(var(--color), 25%, 77%);
+}
+.light .list i {
+	background: hsl(var(--color), 70%, 70%);
+}
+.light .list .arrow {
+	background: hsl(var(--color), 30%, 73%);
+	color: hsl(var(--color), 60%, 25%);
+}
+.light .list .item:hover .arrow {
+	background: hsl(var(--color), 30%, 67%);
+}
+.light .sided i {
+	background: hsl(var(--color), 100%, 77%);
+}
+.light .bar .progress {
+	background: hsl(var(--color), 25%, 77%);
+}
+.light .bar .progress:after {
+	background: hsl(var(--color), 20%, 22%);
+}
+.light .themes .theme.selected {
+	border: 4px solid hsl(var(--color), 80%, 25%);
+}
