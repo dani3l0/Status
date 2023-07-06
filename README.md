@@ -16,22 +16,34 @@ It utilizes virtual filesystems (like `/sys`, `/proc` etc.) to retrieve informat
 
 This will take you just a few seconds. It's up to you which one you choose :)
 
-### :gear: Bare-metal
+### :hammer: Bare-metal
 
-Status has access to all virtual filesystems in your OS, which means more information and most reliable values. :whale: Docker support is broken for now.
+**:heavy_check_mark: Recommended.** Status has access to all virtual filesystems in your OS, which means more information and most reliable values.
 
 ```
 # Clone the repo
 git clone https://github.com/dani3l0/Status && cd Status
 
-# Install dependenc(y)
-pip install -r requirements.txt
+# Install required modules
+pip3 install -r requirements.txt
 
-# Run!
+# Run Status!
 python3 status.py
 ```
 
-**Status should be available on [localhost:9090](http://localhost:9090)**.
+### :whale: Docker
+
+**It just works.** Most of features should run without hassle, but depending on your OS configuration you may notice some minor limitations.
+
+```
+# Clone the repo
+git clone https://github.com/dani3l0/Status && cd Status
+
+# Build & run app
+docker-compose up -d
+```
+
+App should be available on [localhost:9090](http://localhost:9090).
 
 
 ## :wrench: Configuration
@@ -57,6 +69,6 @@ Config keys are named slightly differently under different ways of configuration
 | **Example #2** | `server.address`    | `STATUS_SERVER_ADDRESS`     | `--server-address`    |
 | **Example #3** | `misc.debug`        | `STATUS_MISC_DEBUG`         | `--misc-debug`        |
 
-Command line offers `--config` (or `-c`) to set custom config location. Running Status with `--no-config` will neither read nor write any configuration file.
+Command line offers `--config` (or `-c`) to set custom config location.
 
-For more detailed information, please visit project's [wiki](wiki).
+Running Status with `--no-config` will neither read nor write any configuration file. Overrides `--config`.
