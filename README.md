@@ -1,4 +1,4 @@
-<img src="status.png" width="800">
+<img src="preview.png">
 
 ## :thinking: What is it?
 
