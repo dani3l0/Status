@@ -1,12 +1,16 @@
 version: "2"
 services:
   app:
+    container_name: status_app
     build: .
-    ports:
-      - "9090:9090"
     volumes:
-      - "/dev:/mnt/host/dev"
-      - "/etc:/mnt/host/etc"
-      - "/etc/os-release:/mnt/host/etc/os-release"
-      - "/proc:/mnt/host/proc"
-      - "/sys:/mnt/host/sys"
+      - "/etc/os-release:/host_root/etc/os-release:ro"
+      - "/etc/hostname:/host_root/etc/hostname:ro"
+      - "/proc:/host_root/proc"
+      - "/proc/mounts:/host_root/proc/mounts"
+      - "/home:/home:ro"
+      - "/tmp:/tmp:ro"
+      - "/mnt:/mnt:ro"
+      - "/media:/media:ro"
+      - "/run/media:/run/media:ro"
+    network_mode: "host"

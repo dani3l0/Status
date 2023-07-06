@@ -11,7 +11,8 @@ except KeyError:
 
 def get(path: str, isint: bool = False, fallback = None):
 	try:
-		path = CUSTOM_ROOT_PATH + path
+		if os.path.exists(CUSTOM_ROOT_PATH + path):
+			path = CUSTOM_ROOT_PATH + path
 		val = open(path, "r").read().rstrip()
 		res = int(val) if isint else val
 	except (FileNotFoundError, ValueError):
@@ -33,13 +34,15 @@ def temp_val(raw_value: int):
 
 
 def ls(path: str):
-	path = CUSTOM_ROOT_PATH + path
+	if os.path.exists(CUSTOM_ROOT_PATH + path):
+		path = CUSTOM_ROOT_PATH + path
 	files = [os.path.join(path, f) for f in os.listdir(path)]
 	return sorted(files)
 
 
 def ls_glob(path: str, target: str):
-	path = CUSTOM_ROOT_PATH + path
+	if os.path.exists(CUSTOM_ROOT_PATH + path):
+		path = CUSTOM_ROOT_PATH + path
 	files = glob(os.path.join(path, target))
 	return sorted(files)
 
