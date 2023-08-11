@@ -87,7 +87,7 @@ function updateMem(mem) {
 	mkItem("mem-list", "account_tree", "Processes", mem.processes)
 }
 
-
+var storage_last = []
 function updateStorage(storage) {
 	let all_total = 0
 	let all_used  = 0
@@ -105,6 +105,15 @@ function updateStorage(storage) {
 		all_total += p.total
 	}
 
+	// Clean unused disks
+	if (Object.keys(storage_last).length > 0) {
+		for (let last_disk in storage_last) {
+			if (!(last_disk in storage)) {
+				document.getElementById(`storage-list-${last_disk}`).remove()
+			}
+		}
+	}
+
 	let all_free = all_total - all_used
 	let s = parseSize(all_used / 1000, "B").split(" ")
 
@@ -117,6 +126,8 @@ function updateStorage(storage) {
 		`${parseSize(all_total / 1000, "B")} in total`,
 		`${parseSize(all_free / 1000, "B")} is available`
 	)
+
+	storage_last = storage
 }
 
 
