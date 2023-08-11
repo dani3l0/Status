@@ -84,6 +84,7 @@ function selectTheme(isLight, save=true) {
 }
 
 function update() {
+	if (document.hidden) return
 	let xhr = new XMLHttpRequest()
 	xhr.open("GET", "api/status")
 	xhr.onload = function() {
