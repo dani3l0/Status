@@ -1,7 +1,10 @@
-document.addEventListener("DOMContentLoaded", () => {
-	loadBackButtons()
+window.addEventListener("load", () => {
 	update()
 	setInterval(update, 1500)
+})
+
+document.addEventListener("DOMContentLoaded", () => {
+	loadBackButtons()
 	loadThemePicker()
 	try {
 		let accent = localStorage.getItem("statusapp-accent")
@@ -13,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	}
 	catch (e) {}
 })
+
 
 function loadBackButtons() {
 	let buttons = getClasses("back")
