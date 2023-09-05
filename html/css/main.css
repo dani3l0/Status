@@ -97,11 +97,15 @@ p {
 .title-main {
 	text-align: center;
 	font-size: 72px;
-	margin: 112px 0 12px;
+	margin: 112px 0 0;
 }
 .title-main div {
 	display: inline-block;
 	color: hsl(var(--color), 90%, 82%);
+}
+#main-device-name {
+	margin-bottom: 4px;
+	opacity: .7;
 }
 button {
 	display: flex;
