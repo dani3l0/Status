@@ -17,23 +17,34 @@ document.addEventListener("DOMContentLoaded", () => {
 	catch (e) {}
 })
 
+window.addEventListener("hashchange", (event) => {
+	let hash = window.location.hash.slice(1)
+	if (hash == "") hash = "main"
+	goto(hash, false)
+	console.log("xd")
+})
 
 function loadBackButtons() {
 	let buttons = getClasses("back")
 	for (let button of buttons) {
 		button.onclick = () => {
-			goto("main")
+			goBack()
 		}
 	}
 }
 
-function goto(target) {
+function goto(target, updateHash = true) {
+	if (updateHash) window.location.hash = target
 	let toShow = get(target)
 	let screens = getClasses("screen")
 	for (screen of screens) {
 		if (toShow == screen) screen.classList.remove("hidden")
 		else screen.classList.add("hidden")
 	}
+}
+
+function goBack() {
+	window.history.back()
 }
 
 function loadThemePicker() {
