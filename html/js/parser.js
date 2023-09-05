@@ -1,3 +1,6 @@
+function updateDeviceName(deviceName) {
+	set("main-device-name", deviceName)
+}
 function updateCPU(cpu) {
 	// Temperatures
 	let temps = [],

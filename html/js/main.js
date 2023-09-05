@@ -99,6 +99,7 @@ function parseData(resp) {
 	try {
 		let data = JSON.parse(resp.responseText)
 		if (!data_prev) data_prev = data
+		updateDeviceName(data.host.hostname)
 		updateCPU(data.cpu)
 		updateMem(data.memory)
 		updateStorage(data.storage)
