@@ -1,5 +1,7 @@
 <img src="preview.png">
 
+**:warning: Project in maintenance mode**. This means no new features will appear, only bug fixes. For more info, see **[Announcement](announcement.md)**.
+
 ## :thinking: What is it?
 
 :information_source: **Status** is a simple, lightweight system monitoring app for small homeservers running Linux.
