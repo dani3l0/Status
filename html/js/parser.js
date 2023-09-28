@@ -147,7 +147,8 @@ function updateNet(net_last, net) {
 	set("net-down-speed", parseSize(rx_speed, "bit/s"))
 	set("net-down-speed-bytes", parseSize(rx_speed / 8, "B/s"))
 
-	mkItem("net-list", "speed", "Connection speed", parseSize(net.speed * 1000, "bit/s"))
+	let netspeed = (net.speed != -1) ? parseSize(net.speed * 1000, "bit/s") : "Unknown" 
+	mkItem("net-list", "speed", "Connection speed", netspeed)
 
 	mkItem("net-list", "arrow_upward", "Upload", [
 		`${parseSize(net.tx / 1000, "B")} since boot`
