@@ -9,7 +9,7 @@ It utilizes virtual filesystems (like `/sys`, `/proc` etc.) to retrieve informat
 
 :runner: Runs flawlessly on most desktop computers, mini PCs and Raspberry Pis. However, virtual isolated environments may cause problems.
 
-:tv: **[Check the live demo!](https://status-ksk5.onrender.com/)** (but give it a while to load as Render suspends unused apps)
+:tv: **[Check the live demo!](https://status.enshittification.social/)** (hosted by [Codixer](https://github.com/Codixer), see [#6](https://github.com/dani3l0/Status/issues/6))
 
 
 ## :rocket: Installation
