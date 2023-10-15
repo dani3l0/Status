@@ -1,4 +1,5 @@
 import shutil
+import os
 
 from .utils import get
 from ..config import config
@@ -26,15 +27,23 @@ class Storage:
 						if line[1] in config.get("machine", "storage_blacklist"):
 							stuff = None
 					if stuff and line[0] not in listed_devices:
-						filesystems[stuff[0]] = [line[1], stuff[1]]
+						filesystems[stuff[0]] = [line[1], stuff[1], line[2]]
 					listed_devices.append(line[0])
 
 		for fs in filesystems:
-			usage = shutil.disk_usage(filesystems[fs][0])
+			usage = os.statvfs(filesystems[fs][0])
+
+			# ext4 fs dirty-improvement to show nicely rounded storage size
+			inode_overhead = 0
+			if filesystems[fs][2] == "ext4":
+				inode_size = 256		# Default for mkfs.ext4
+				correction = 1.2
+				inode_overhead = inode_size * usage.f_files * correction
+
 			filesystems[fs] = {
 				"icon": filesystems[fs][1],
-				"total": usage.total,
-				"available": usage.free
+				"total": usage.f_bsize * usage.f_blocks + inode_overhead,
+				"available": usage.f_bsize * usage.f_bavail
 			}
 
 		return filesystems
