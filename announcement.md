@@ -1,6 +1,6 @@
 # Maintenance mode
 
-Status will not receive new features, only bug fixes.
+Status will not receive new features, only bug/security fixes.
 
 
 ### Why?
@@ -15,6 +15,13 @@ You say Docker? Yes, but it's not a complete solution. Status mainly reads files
 The solution is simple. Fully functional, single executable static binary with all resources already included. What if you download **just one file** and run it with **just one command**?
 
 Yes, I am going to rewrite Status again, but this time in `Go`.
+
+
+### New project has been started!
+
+Project is not yet usable, but I'm sharing it to prove our app is not dead at all :)
+
+For more details and updates, check **[dani3l0/Statee](https://github.com/dani3l0/Statee)** repo
 
 
 ### Planned features
