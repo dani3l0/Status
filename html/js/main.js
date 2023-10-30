@@ -21,7 +21,6 @@ window.addEventListener("hashchange", (event) => {
 	let hash = window.location.hash.slice(1)
 	if (hash == "") hash = "main"
 	goto(hash, false)
-	console.log("xd")
 })
 
 function loadBackButtons() {
