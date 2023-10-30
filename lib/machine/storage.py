@@ -30,8 +30,14 @@ class Storage:
 						filesystems[stuff[0]] = [line[1], stuff[1], line[2]]
 					listed_devices.append(line[0])
 
+		result = {}
+
 		for fs in filesystems:
-			usage = os.statvfs(filesystems[fs][0])
+			try:
+				usage = os.statvfs(filesystems[fs][0])
+
+			except PermissionError:
+				continue
 
 			# ext4 fs dirty-improvement to show nicely rounded storage size
 			inode_overhead = 0
@@ -40,13 +46,13 @@ class Storage:
 				correction = 1.2
 				inode_overhead = inode_size * usage.f_files * correction
 
-			filesystems[fs] = {
+			result[fs] = {
 				"icon": filesystems[fs][1],
 				"total": usage.f_bsize * usage.f_blocks + inode_overhead,
 				"available": usage.f_bsize * usage.f_bavail
 			}
 
-		return filesystems
+		return result
 
 
 
