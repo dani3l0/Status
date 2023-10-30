@@ -23,10 +23,13 @@ class Storage:
 				if mount.startswith("/dev/"):
 					line = mount.split(" ")
 					stuff = nice_path(line[1])
+					if config.get("machine", "hide_boot_partition"):
+						if line[1].startswith("/boot"):
+							continue
 					if config.get("machine", "enable_storage_blacklist"):
 						if line[1] in config.get("machine", "storage_blacklist"):
-							stuff = None
-					if stuff and line[0] not in listed_devices:
+							continue
+					if line[0] not in listed_devices:
 						filesystems[stuff[0]] = [line[1], stuff[1], line[2]]
 					listed_devices.append(line[0])
 

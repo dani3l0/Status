@@ -34,6 +34,10 @@ CONFIG_DEFAULT = {
 		},
 	},
 	"machine": {
+		"hide_boot_partition": {
+			"value": True,
+			"desc": "hide partitions under /boot in Storage menu"
+		},
 		"custom_storage": {
 			"value": False,
 			"short": "cs",
