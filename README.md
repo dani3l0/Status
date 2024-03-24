@@ -1,6 +1,5 @@
-<img src="preview.png">
+**⚠️ Project in maintenance mode**. This means no new features will appear, only bug fixes. For more info, see **[Announcement](announcement.md)**.
 
-**:warning: Project in maintenance mode**. This means no new features will appear, only bug fixes. For more info, see **[Announcement](announcement.md)**.
 
 ## :thinking: What is it?
 
@@ -12,6 +11,13 @@ It utilizes virtual filesystems (like `/sys`, `/proc` etc.) to retrieve informat
 :runner: Runs flawlessly on most desktop computers, mini PCs and Raspberry Pis. However, virtual isolated environments may cause problems.
 
 :tv: **[Check the live demo!](https://status.enshittification.social/)** (hosted by [Codixer](https://github.com/Codixer), see [#6](https://github.com/dani3l0/Status/issues/6))
+
+
+### Web UI
+<img src="preview.png">
+
+### 📱 iOS app by [@JGeek00](https://github.com/JGeek00) - [AppStore](https://apps.apple.com/us/app/server-status-server-monitor/id6479648296)
+<img src="preview-ios.png">
 
 
 ## :rocket: Installation
