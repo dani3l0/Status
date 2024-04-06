@@ -72,4 +72,8 @@ if config.get("server", "domain"):
 	ssl_context.load_cert_chain(pubkey, privkey)
 
 
-web.run_app(app, host=config.get("server", "address"), port=config.get("server", "port"), ssl_context=ssl_context)
+web.run_app(app,
+	host=config.get("server", "address"),
+	port=int(config.get("server", "port")),
+	ssl_context=ssl_context
+)
