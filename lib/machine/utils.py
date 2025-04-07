@@ -34,10 +34,13 @@ def temp_val(raw_value: int):
 
 
 def ls(path: str):
-	if os.path.exists(CUSTOM_ROOT_PATH + path):
-		path = CUSTOM_ROOT_PATH + path
-	files = [os.path.join(path, f) for f in os.listdir(path)]
-	return sorted(files)
+	try:
+		if os.path.exists(CUSTOM_ROOT_PATH + path):
+			path = CUSTOM_ROOT_PATH + path
+		files = [os.path.join(path, f) for f in os.listdir(path)]
+		return sorted(files)
+	except (FileNotFoundError, NotADirectoryError, PermissionError):
+		return []
 
 
 def ls_glob(path: str, target: str):
