@@ -1,4 +1,3 @@
-version: "2"
 services:
   app:
     container_name: status_app
@@ -13,3 +12,4 @@ services:
       - "/media:/media:ro"
       - "/run/media:/run/media:ro"
     network_mode: "host"
+    restart: "unless-stopped"
