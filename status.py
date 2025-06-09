@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import traceback
 from aiohttp import web
 import ssl
