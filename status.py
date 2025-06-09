@@ -63,11 +63,11 @@ if config.get("server", "domain"):
 	ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
 	ssl_dir = f"/etc/letsencrypt/live/{config.get('server', 'domain')}"
 
-	pubkey = config.get("server", "tls_cert_path")
+	pubkey = config.get("server", "ssl_cert")
 	if not pubkey:
 		pubkey = f"{ssl_dir}/fullchain.pem"
 
-	privkey = config.get("server", "tls_key_path")
+	privkey = config.get("server", "ssl_key")
 	if not privkey:
 		privkey = f"{ssl_dir}/privkey.pem"
 
