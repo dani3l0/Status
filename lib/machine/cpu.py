@@ -117,10 +117,12 @@ class CPU:
 		for line in cpu_info.split("\n"):
 			if "model name" in line:
 				cpu_model = re.sub(".*model name.*:", "", line, 1).strip()
-			if "cache size" in line:
-				cache_size = int(re.sub(".*cache size.*:", "", line, 1).strip().split(" ")[0])
 			if "cpu cores" in line:
 				cores = int(re.sub(".*cpu cores.*:", "", line, 1).strip())
+
+		caches = [x for x in ls("/sys/devices/system/cpu/cpu0/cache") if "index" in x]
+		if len(caches):
+			cache_size = int(get(f"{caches[-1]}/size").rstrip("K"))
 
 		return {
 			"model": cpu_model,
