@@ -167,3 +167,53 @@ function updateHost(host) {
 	mkItem("host-list", "memory", "App memory", parseSize(host.app_memory, "B"))
 	mkItem("host-list", "speed", "Load averages", host.loadavg.join(", "))
 }
+
+function updateBattery(battery) {
+	if (!battery) {
+		let mainBatItem = document.getElementById("main-battery-item");
+		if (mainBatItem) mainBatItem.style.display = "none";
+		return;
+	}
+	let mainBatItem = document.getElementById("main-battery-item");
+	if (mainBatItem) mainBatItem.style.display = "flex";
+
+	let icon = "battery_std";
+	let statusLower = battery.status.toLowerCase();
+	if (statusLower === "charging") {
+		icon = "battery_charging_full";
+	} else {
+		let cap = battery.capacity;
+		if (cap <= 15) icon = "battery_alert";
+		else if (cap <= 30) icon = "battery_low";
+		else if (cap <= 50) icon = "battery_3_bar";
+		else if (cap <= 80) icon = "battery_5_bar";
+		else icon = "battery_full";
+	}
+	
+	let iconEl = document.getElementById("main-battery-icon");
+	if (iconEl) {
+		iconEl.innerText = icon;
+	}
+
+	set("main-battery", `${battery.capacity}% (${battery.status})`);
+
+	mkBar("battery-bar",
+		battery.capacity / 100, battery.capacity, "%",
+		`Status: ${battery.status}`,
+		`Health: ${battery.health}`
+	);
+
+	let _battery_details = [];
+	_battery_details.addNode(`Status: ${battery.status}`);
+	_battery_details.addNode(`Health: ${battery.health}`);
+	if (battery.temp !== null) {
+		_battery_details.addNode(`Temperature: ${Math.round(battery.temp * 10) / 10} °C`);
+	}
+	if (battery.voltage !== null) {
+		_battery_details.addNode(`Voltage: ${Math.round(battery.voltage * 100) / 100} V`);
+	}
+
+	mkItem("battery-list", icon, "Battery Status", `${battery.capacity}%`);
+	mkItem("battery-list", "bolt", "Power details", _battery_details);
+}
+

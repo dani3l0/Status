@@ -6,11 +6,23 @@ class Memory:
 	@staticmethod
 	def get_usage():
 		meminfo = get("/proc/meminfo")
-		total = int(grep(meminfo, "MemTotal:"))
-		available = int(grep(meminfo, "MemAvailable:"))
-		cached = int(grep(meminfo, "Cached:"))
-		swap_total = int(grep(meminfo, "SwapTotal:"))
-		swap_available = int(grep(meminfo, "SwapFree:"))
+
+		def safe_get_mem(key):
+			val = grep(meminfo, key)
+			return int(val) if val else 0
+
+		total = safe_get_mem("MemTotal:")
+		available = safe_get_mem("MemAvailable:")
+		if not available:
+			# Fallback for very old kernels or limited environments
+			free = safe_get_mem("MemFree:")
+			buffers = safe_get_mem("Buffers:")
+			cached_val = safe_get_mem("Cached:")
+			available = free + buffers + cached_val
+		
+		cached = safe_get_mem("Cached:")
+		swap_total = safe_get_mem("SwapTotal:")
+		swap_available = safe_get_mem("SwapFree:")
 
 		procs = ls("/proc")
 		processes = []

@@ -69,6 +69,14 @@
 						</div>
 						<i class="arrow"></i>
 					</div>
+					<div class="item clickable" id="main-battery-item" onclick="goto('battery')" style="display: none;">
+						<i id="main-battery-icon">battery_std</i>
+						<div class="text">
+							<div class="name">Battery</div>
+							<div class="value" id="main-battery">N/A</div>
+						</div>
+						<i class="arrow"></i>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -150,6 +158,20 @@
 			</div>
 			<div class="contents">
 				<div class="list" id="host-list"></div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Battery screen -->
+	<div class="screen hidden" id="battery">
+		<div class="wrapper">
+			<div class="header">
+				<i class="back"></i>
+				<div class="title">Battery</div>
+			</div>
+			<div class="contents">
+				<div class="bar" id="battery-bar"></div>
+				<div class="list" id="battery-list"></div>
 			</div>
 		</div>
 	</div>

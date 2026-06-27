@@ -125,6 +125,12 @@ function parseData(resp) {
 		updateStorage(data.storage)
 		updateNet(data_prev.network, data.network)
 		updateHost(data.host)
+		if (data.battery) {
+			updateBattery(data.battery)
+		} else {
+			let mainBatItem = document.getElementById("main-battery-item");
+			if (mainBatItem) mainBatItem.style.display = "none";
+		}
 		data_prev = data
 	}
 	catch (e) {

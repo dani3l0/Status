@@ -6,6 +6,7 @@ services:
       - "/etc/os-release:/host_root/etc/os-release:ro"
       - "/etc/hostname:/host_root/etc/hostname:ro"
       - "/proc:/host_root/proc:ro"
+      - "/sys:/host_root/sys:ro"
       - "/home:/home:ro"
       - "/tmp:/tmp:ro"
       - "/mnt:/mnt:ro"
