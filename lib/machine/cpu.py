@@ -28,6 +28,7 @@ class CPU:
 		self.cpu_model = cpu_info["model"]
 		self.cpu_cache = cpu_info["cache"]
 		self.cores = cpu_info["cores"]
+		self.count = cpu_info["count"]
 		self.cpu_thermal = find_cpu_thermal()
 
 
@@ -37,7 +38,7 @@ class CPU:
 			"utilisation": (await self.get_utilisation()),
 			"temperatures": self.get_temperatures(),
 			"frequencies": self.get_frequencies(),
-			"count": self.get_count(),
+			"count": self.count,
 			"cache": self.cpu_cache,
 			"cores": self.cores
 		}
@@ -103,15 +104,10 @@ class CPU:
 
 
 	@staticmethod
-	def get_count():
-		return os.cpu_count()
-
-
-	@staticmethod
 	def get_cpu_info():
 		cpu_model = None
 		cache_size = None
-		cores = 1
+
 		cpu_info = get("/proc/cpuinfo")
 
 		for line in cpu_info.split("\n"):
@@ -119,8 +115,9 @@ class CPU:
 				cpu_model = re.sub(".*model name.*:", "", line, 1).strip()
 			if "Model" in line:
 				cpu_model = re.sub(".*Model.*:", "", line, 1).strip()
-			if "cpu cores" in line:
-				cores = int(re.sub(".*cpu cores.*:", "", line, 1).strip())
+
+		count = os.cpu_count() or 1
+		cores = get(f"/sys/devices/system/cpu/cpu{count - 1}/topology/core_id", isint=True) + 1
 
 		caches = [x for x in ls("/sys/devices/system/cpu/cpu0/cache") if "index" in x]
 		if len(caches):
@@ -129,7 +126,8 @@ class CPU:
 		return {
 			"model": cpu_model,
 			"cache": cache_size,
-			"cores": cores
+			"cores": cores,
+			"count": count
 		}
 
 
