@@ -9,9 +9,9 @@ from .utils import get, ls, ls_glob, basename, parse_temperature
 
 # CPU thermal zone names for various devices
 cpu_thermals = [
-	"coretemp",		# Most desktop computers
+	"coretemp",		# Intel-based systems
+	"k10temp",		# AMD-based systems
 	"cpu_thermal",	# Raspberry Pis
-	"k10temp",		# My AMD-based terminal
 ]
 
 
@@ -61,14 +61,14 @@ class CPU:
 		sensor = thermal["location"]
 		sensor_name = thermal["name"]
 		temps = {}
-	
+
 		for entry in ls_glob(sensor, "temp*_input"):
 			key = basename(entry).replace("_input", "")
 			zone = path(sensor, key)
 			if exists(f"{zone}_label"):
 				key = get(f"{zone}_label")
 				if key.startswith("Package id"): continue
-	
+
 			current = get(f"{zone}_input", isint=True)
 			meltdown = get(f"{zone}_crit", isint=True)
 			divide = sensor_name not in ["cputhermal"]
@@ -80,7 +80,7 @@ class CPU:
 	@staticmethod
 	def get_frequencies():
 		freqs = {}
-	
+
 		for entry in ls("/sys/devices/system/cpu/"):
 			f = basename(entry)
 			if f.startswith("cpu") and f[-1:].isnumeric():
@@ -117,6 +117,8 @@ class CPU:
 		for line in cpu_info.split("\n"):
 			if "model name" in line:
 				cpu_model = re.sub(".*model name.*:", "", line, 1).strip()
+			if "Model" in line:
+				cpu_model = re.sub(".*Model.*:", "", line, 1).strip()
 			if "cpu cores" in line:
 				cores = int(re.sub(".*cpu cores.*:", "", line, 1).strip())
 
